@@ -3,16 +3,34 @@
     const $window = $(window);
     const CONFIG = { mobileBreakpoint: 768, formAction: ["form-process.php", "review-form.php"] };
 
-    // Instant Preloader Dismissal (Zero Delay)
-    const dismissPreloader = () => {
-        $('#preloader, .preloader, .sis-preloader').remove();
-        $('body, html').css({ 'overflow-y': 'auto', 'overflow-x': 'hidden' });
-    };
+    // Signature Azalea Entry Reveal Animation Loader
+    function initAzaleaPreloader() {
+        const $preloader = $('#preloader, .preloader');
+        if (!$preloader.length) return;
 
-    dismissPreloader();
-    $window.on("load", dismissPreloader);
-    $(document).ready(dismissPreloader);
-    setTimeout(dismissPreloader, 50);
+        let dismissed = false;
+        function finishLoading() {
+            if (dismissed) return;
+            dismissed = true;
+            $preloader.addClass('loaded');
+            setTimeout(function () {
+                $preloader.fadeOut(500, function () {
+                    $(this).css('display', 'none');
+                });
+                $('body, html').css({ 'overflow-y': 'auto', 'overflow-x': 'hidden' });
+            }, 600);
+        }
+
+        // Wait for letters reveal sequence for smooth entry satisfaction
+        $window.on('load', function () {
+            setTimeout(finishLoading, 750);
+        });
+
+        // Failsafe: Ensure page is always revealed smoothly
+        setTimeout(finishLoading, 2000);
+    }
+
+    initAzaleaPreloader();
 
    // Sticky Header
     if ($('.sis-active-sticky-header').length) {
