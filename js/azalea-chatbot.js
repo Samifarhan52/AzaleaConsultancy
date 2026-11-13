@@ -31,16 +31,17 @@ Secure permanent resident status and citizenship pathways for you and your famil
       cta: { text: 'Calculate PR Score Free', action: 'eligibility', country: 'Canada' }
     },
 
-    // 3. Golden Visas & Investor Programs
+    // 3. Corporate & Business Visas
     {
-      keywords: ['golden visa', 'investor', 'investment', 'invest', 'eb-5', 'real estate', 'dubai golden visa', 'business visa'],
-      response: `<strong>👑 Golden Visa & Sovereign Investor Programs:</strong><br><br>
-Fast-track residency by investment with complete family inclusion and tax advantages:<br>
-• <strong>UAE 10-Year Golden Visa (Dubai):</strong> Real estate investors (AED 2M+), entrepreneurs, and senior specialists with 0% personal tax.<br>
-• <strong>United States EB-5:</strong> Permanent Green Card route via qualifying TEA enterprise investment.<br>
-• <strong>European Golden Visas:</strong> Spain, Portugal, Greece, and Malta investor residency with Schengen-wide travel freedom.<br><br>
-Azalea coordinates escrow verification, asset documentation, and sovereign embassy lodgement directly from Doha.`,
-      cta: { text: 'Inquire on WhatsApp', action: 'whatsapp', topic: 'Golden Visa & Investor Programs' }
+      keywords: ['corporate', 'business visa', 'business', 'executive', 'commercial', 'trade', 'entrepreneur', 'company'],
+      response: `<strong>💼 Corporate & Business Visa Solutions:</strong><br><br>
+Azalea provides strategic mobility advisory for corporate executives and entrepreneurs:<br>
+• <strong>UAE Corporate Work Visas (Dubai & Abu Dhabi):</strong> Executive work permits, intra-company transfers, and commercial licensing with 0% personal tax.<br>
+• <strong>Germany & Schengen Business Visas:</strong> Fast-track corporate travel, commercial contracts, and EU executive establishment.<br>
+• <strong>United States EB-2 NIW:</strong> Permanent Green Cards for high-achieving professionals and business leaders without employer sponsorship.<br>
+• <strong>United Kingdom Innovator & Skilled Sponsor:</strong> Strategic expansion into the UK market with full compliance.<br><br>
+Azalea coordinates document legalizations, labor quota filings, and consular lodgement directly from Doha.`,
+      cta: { text: 'Inquire on WhatsApp', action: 'whatsapp', topic: 'Corporate & Business Visas' }
     },
 
     // 4. Tourist & Business Visit Visas
@@ -187,12 +188,12 @@ Our US legal counsel supports professionals and investors:<br>
     },
     {
       keywords: ['uae', 'dubai'],
-      response: `<strong>🇦🇪 UAE 10-Year Golden Visa & Green Visa:</strong><br><br>
-Long-term residency in Dubai & UAE with 0% personal income tax:<br>
-• <strong>Real Estate Investors:</strong> 10-Year Golden Visa for properties valued at AED 2M+.<br>
-• <strong>Executives & Specialists:</strong> Senior professionals with basic salary of AED 30,000+.<br>
-• <strong>Entrepreneurs:</strong> Certified startup owners and accredited innovators.<br>
-• <strong>Benefits:</strong> 100% corporate ownership and sponsor spouse/children with no age limits.`,
+      response: `<strong>🇦🇪 UAE Employment & Corporate Work Visas:</strong><br><br>
+Fast-track executive relocation and commercial permits in Dubai & Abu Dhabi with 0% personal income tax:<br>
+• <strong>Corporate Work Permits:</strong> Quota approvals and 2-to-3 year employment visas.<br>
+• <strong>Executives & Specialists:</strong> Senior professional work authorization and Green Visas.<br>
+• <strong>Entrepreneurs & Freelancers:</strong> Certified independent residence permits and business setup.<br>
+• <strong>Benefits:</strong> 100% business ownership, tax advantages, and immediate family sponsorship.`,
       cta: { text: 'Check UAE Eligibility', action: 'eligibility', country: 'UAE & Dubai' }
     },
 
@@ -200,7 +201,7 @@ Long-term residency in Dubai & UAE with 0% personal income tax:<br>
     {
       keywords: ['hello', 'hi', 'hey', 'salam', 'assalam', 'morning', 'evening', 'help', 'start'],
       response: `👋 Hello and welcome to Azalea Tourism & Consultancy!<br><br>
-I am your 24/7 AI Visa & Relocation Advisor. Whether you are looking for Work Permits, Permanent Residency, Golden Visas, or Family Sponsorship, our legal desk in Doha is here to guide you.<br><br>
+I am your 24/7 AI Visa & Relocation Advisor. Whether you are looking for Work Permits, Permanent Residency, Corporate Visas, or Family Sponsorship, our legal desk in Doha is here to guide you.<br><br>
 How may I assist you today? Please choose a service option below or type your question.`,
       cta: { text: 'Explore All Destinations', action: 'link', url: 'our-countries.html' }
     }
@@ -285,7 +286,7 @@ To provide you with the most accurate advice tailored to your nationality, work 
             <div class="chat-quick-chips">
               <span class="quick-chip" data-msg="What work permits and employment visa services do you offer?"><i class="fa-solid fa-briefcase text-primary me-1"></i> Work Permits</span>
               <span class="quick-chip" data-msg="How can I apply for Permanent Residency and settlement abroad?"><i class="fa-solid fa-house-chimney text-primary me-1"></i> Permanent Residency</span>
-              <span class="quick-chip" data-msg="Tell me about Golden Visa and investor residency programs"><i class="fa-solid fa-crown text-warning me-1"></i> Golden Visas</span>
+              <span class="quick-chip" data-msg="What corporate and business visa solutions do you provide?"><i class="fa-solid fa-building-user text-primary me-1"></i> Corporate Visas</span>
               <span class="quick-chip" data-msg="Can you help me get a tourist or business visit visa?"><i class="fa-solid fa-plane-departure text-info me-1"></i> Tourist Visas</span>
               <span class="quick-chip" data-msg="How does family sponsorship and spousal reunification work?"><i class="fa-solid fa-people-roof text-success me-1"></i> Family Sponsorship</span>
               <span class="quick-chip" data-msg="Do you provide document attestation, translation, and embassy legalization?"><i class="fa-solid fa-stamp text-secondary me-1"></i> Document Attestation</span>

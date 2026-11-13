@@ -17,7 +17,7 @@
     'Worldwide Tourism',
     'Business & Investor Visas',
     'Europe Opportunity Cards',
-    'Global Citizenship & Golden Visas'
+    'Corporate & Business Visas'
   ];
 
   let currentKeywordIdx = 0;
