@@ -234,16 +234,19 @@ To provide you with the most accurate advice tailored to your nationality, work 
 
     const botHtml = `
       <div id="azaleaChatbotWidget" class="azalea-chatbot-wrap">
-        <!-- Floating Chat Trigger Button -->
-        <button id="azaleaChatTrigger" class="azalea-chat-toggle-btn" aria-label="Open AI Visa Advisor" title="Chat with Azalea AI">
-          <div class="chat-icon-avatar">
-            <i class="fa-solid fa-comments chat-icon-open"></i>
-            <i class="fa-solid fa-xmark chat-icon-close"></i>
+        <!-- Alert Message Badge Above Globe Icon -->
+        <div id="azaleaChatAlertBubble" class="azalea-chat-alert-bubble" title="AI Advisor Online">
+          <span class="chat-alert-pulse-dot"></span>
+          <span class="chat-alert-text">AI Advisor</span>
+          <span class="chat-alert-arrow"></span>
+        </div>
+
+        <!-- Floating Globe Trigger Button -->
+        <button id="azaleaChatTrigger" class="azalea-globe-toggle-btn" aria-label="Open AI Visa Advisor" title="Chat with Azalea AI Advisor">
+          <div class="globe-icon-avatar">
+            <i class="fa-solid fa-earth-americas globe-icon-open"></i>
+            <i class="fa-solid fa-xmark globe-icon-close"></i>
           </div>
-          <span class="chat-toggle-label">
-            <span class="chat-online-dot"></span>
-            Chat with AI Advisor
-          </span>
           <span class="chat-unread-badge" id="chatUnreadBadge">1</span>
         </button>
 
@@ -332,6 +335,7 @@ To provide you with the most accurate advice tailored to your nationality, work 
 
   function setupChatbotEvents() {
     const triggerBtn = document.getElementById('azaleaChatTrigger');
+    const alertBubble = document.getElementById('azaleaChatAlertBubble');
     const chatWin = document.getElementById('azaleaChatWindow');
     const closeBtn = document.getElementById('azaleaChatCloseBtn');
     const chatForm = document.getElementById('azaleaChatForm');
@@ -342,10 +346,12 @@ To provide you with the most accurate advice tailored to your nationality, work 
       const isVisible = chatWin.style.display !== 'none';
       if (isVisible) {
         chatWin.style.display = 'none';
-        triggerBtn.classList.remove('is-active');
+        if (triggerBtn) triggerBtn.classList.remove('is-active');
+        if (alertBubble) alertBubble.classList.remove('is-hidden');
       } else {
         chatWin.style.display = 'flex';
-        triggerBtn.classList.add('is-active');
+        if (triggerBtn) triggerBtn.classList.add('is-active');
+        if (alertBubble) alertBubble.classList.add('is-hidden');
         if (unreadBadge) unreadBadge.style.display = 'none';
         chatInput.focus();
         scrollToBottom();
@@ -355,10 +361,14 @@ To provide you with the most accurate advice tailored to your nationality, work 
     if (triggerBtn) {
       triggerBtn.addEventListener('click', toggleChat);
     }
+    if (alertBubble) {
+      alertBubble.addEventListener('click', toggleChat);
+    }
     if (closeBtn) {
       closeBtn.addEventListener('click', () => {
         chatWin.style.display = 'none';
-        triggerBtn.classList.remove('is-active');
+        if (triggerBtn) triggerBtn.classList.remove('is-active');
+        if (alertBubble) alertBubble.classList.remove('is-hidden');
       });
     }
 

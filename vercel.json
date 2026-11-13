@@ -4,6 +4,7 @@
   "rewrites": [
     { "source": "/form", "destination": "/form.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/terms-conditions", "destination": "/terms-conditions.html" }
+    { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
+    { "source": "/leads", "destination": "/leads.html" }
   ]
 }

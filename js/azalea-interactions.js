@@ -379,6 +379,20 @@
       const score = calculateLiveScore();
       const refCode = 'AZA-QA-' + Math.floor(1000 + Math.random() * 9000);
 
+      // Save lead to local database & trigger Excel ledger
+      if (window.azaleaSaveLead) {
+        window.azaleaSaveLead({
+          id: refCode,
+          name: name,
+          email: email,
+          mobile: fullPhone,
+          targetCountry: country,
+          visaInterest: visaType,
+          timeline: timeline,
+          source: 'Modal Eligibility Form'
+        });
+      }
+
       document.getElementById('wizardFlowWrapper').style.display = 'none';
       const resultWrap = document.getElementById('wizardResultContainer');
       resultWrap.style.display = 'block';
@@ -571,3 +585,152 @@
   }
 
 })();
+
+
+/* ===================================================================
+ * AZALEA LANGUAGE SWITCHER (NAVBAR SPEC)
+ * =================================================================== */
+window.azaleaSwitchLanguage = function (lang) {
+  const cleanLang = (lang || 'en').toLowerCase();
+  document.cookie = `googtrans=/en/${cleanLang}; path=/;`;
+  document.cookie = `googtrans=/en/${cleanLang}; path=/; domain=${window.location.hostname};`;
+
+  const code = cleanLang.toUpperCase();
+  document.querySelectorAll('.azalea-current-lang-code').forEach((el) => {
+    el.innerText = code;
+  });
+
+  try {
+    localStorage.setItem('azalea_pref_lang', cleanLang);
+  } catch (e) {}
+
+  const gtCombo = document.querySelector('.goog-te-combo');
+  if (gtCombo) {
+    gtCombo.value = cleanLang;
+    gtCombo.dispatchEvent(new Event('change'));
+  } else {
+    window.location.reload();
+  }
+};
+
+// Sync Language Badge on Load
+try {
+  const savedLang = localStorage.getItem('azalea_pref_lang') || (document.cookie.match(/googtrans=\/en\/([a-z-]+)/i) || [])[1];
+  if (savedLang) {
+    const code = savedLang.toUpperCase();
+    document.querySelectorAll('.azalea-current-lang-code').forEach((el) => {
+      el.innerText = code;
+    });
+  }
+} catch (e) {}
+
+/* ===================================================================
+ * AZALEA CENTRALIZED LEADS ENGINE & EXCEL EXPORT
+ * =================================================================== */
+window.azaleaGetLeads = function () {
+  try {
+    return JSON.parse(localStorage.getItem('azalea_leads_database') || '[]');
+  } catch (e) {
+    return [];
+  }
+};
+
+window.azaleaSaveLead = function (lead) {
+  try {
+    const leads = window.azaleaGetLeads();
+    const newLead = {
+      id: lead.id || ('AZA-QA-' + Math.floor(1000 + Math.random() * 9000)),
+      date: new Date().toLocaleString('en-US', { timeZone: 'Asia/Qatar' }),
+      timestamp: Date.now(),
+      name: lead.name || 'Anonymous Applicant',
+      mobile: lead.mobile || 'N/A',
+      email: lead.email || 'N/A',
+      targetCountry: lead.targetCountry || 'General Relocation',
+      visaInterest: lead.visaInterest || 'General Visa Assessment',
+      education: lead.education || 'N/A',
+      timeline: lead.timeline || 'Immediate (1 - 3 Months)',
+      source: lead.source || 'Website Assessment Form',
+      status: 'Active Lead'
+    };
+
+    leads.unshift(newLead);
+    localStorage.setItem('azalea_leads_database', JSON.stringify(leads));
+
+    // Optional cloud webhook sync (Google Sheets / Webhook)
+    const webhookUrl = localStorage.getItem('azalea_leads_webhook_url');
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newLead)
+      }).catch((err) => console.log('Webhook sync note:', err));
+    }
+
+    console.log('Lead logged successfully:', newLead.id, newLead.name);
+    return newLead;
+  } catch (err) {
+    console.error('Error saving lead:', err);
+  }
+};
+
+window.azaleaClearLeads = function () {
+  if (confirm('Are you sure you want to clear all leads stored in local database?')) {
+    localStorage.removeItem('azalea_leads_database');
+    window.location.reload();
+  }
+};
+
+window.azaleaExportLeadsToExcel = function () {
+  try {
+    const rawLeads = window.azaleaGetLeads();
+    if (!rawLeads || rawLeads.length === 0) {
+      alert('No leads recorded yet. Submit an assessment form or click "Add Test Lead" in the Leads Console.');
+      return;
+    }
+
+    const headers = [
+      'Case Ref ID',
+      'Date & Time (Doha)',
+      'Full Name',
+      'Mobile Number',
+      'Email Address',
+      'Target Relocation Country',
+      'Visa Category / Interest',
+      'Education Level',
+      'Planned Timeline',
+      'Lead Source',
+      'Status'
+    ];
+
+    const rows = rawLeads.map((l) => [
+      `"${(l.id || '').replace(/"/g, '""')}"`,
+      `"${(l.date || '').replace(/"/g, '""')}"`,
+      `"${(l.name || '').replace(/"/g, '""')}"`,
+      `"${(l.mobile || '').replace(/"/g, '""')}"`,
+      `"${(l.email || '').replace(/"/g, '""')}"`,
+      `"${(l.targetCountry || '').replace(/"/g, '""')}"`,
+      `"${(l.visaInterest || '').replace(/"/g, '""')}"`,
+      `"${(l.education || '').replace(/"/g, '""')}"`,
+      `"${(l.timeline || '').replace(/"/g, '""')}"`,
+      `"${(l.source || '').replace(/"/g, '""')}"`,
+      `"${(l.status || 'Active Lead').replace(/"/g, '""')}"`
+    ]);
+
+    // UTF-8 Byte Order Mark for flawless Arabic & special characters in Microsoft Excel
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map((e) => e.join(','))].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const dateStr = new Date().toISOString().slice(0, 10);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Azalea_Client_Leads_${dateStr}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('Error exporting leads:', err);
+    alert('Export failed. Please check browser permissions.');
+  }
+};

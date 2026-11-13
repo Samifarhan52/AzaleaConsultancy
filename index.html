@@ -258,6 +258,7 @@
                                     <li class="nav-item"><a class="nav-link" href="form.html">Visa Assessment Form</a></li>
                                     <li class="nav-item"><a class="nav-link" href="privacy-policy.html">Privacy Policy</a></li>
                                     <li class="nav-item"><a class="nav-link" href="terms-conditions.html">Terms &amp; Conditions</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="leads.html">Leads &amp; Excel Console</a></li>
                                  </ul>
                               </li>
                               <li class="nav-item">
@@ -268,7 +269,21 @@
                      </div>
                      <!-- Main Menu End -->
                   </nav>
-                  <div class="sisf-widget-holder sisf--two d-flex align-items-center">
+                  <div class="sisf-widget-holder sisf--two d-flex align-items-center gap-3">
+                     <!-- Navbar Language Switcher Pill (as per reference screenshot) -->
+                     <div class="azalea-lang-nav-wrap dropdown">
+                        <button class="azalea-lang-pill-btn dropdown-toggle" type="button" id="azaleaNavLangBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Select Language">
+                           <i class="fa-solid fa-globe text-primary"></i>
+                           <span class="azalea-current-lang-code">EN</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 p-2" aria-labelledby="azaleaNavLangBtn" style="min-width: 170px;">
+                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2 active" href="javascript:void(0)" onclick="azaleaSwitchLanguage('en')"><span class="fs-6">🇬🇧</span> English (EN)</a></li>
+                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ar')"><span class="fs-6">🇶🇦</span> العربية (AR)</a></li>
+                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('tr')"><span class="fs-6">🇹🇷</span> Türkçe (TR)</a></li>
+                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('fr')"><span class="fs-6">🇫🇷</span> Français (FR)</a></li>
+                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('de')"><span class="fs-6">🇩🇪</span> Deutsch (DE)</a></li>
+                        </ul>
+                     </div>
                      <div class="header-btn"><a href="form.html" class="sis-btn-default shadow-none">Free Eligibility Check<i class="fa-solid fa-arrow-right-long"></i></a></div>
                   </div>
                </div>
