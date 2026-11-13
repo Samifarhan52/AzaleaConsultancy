@@ -306,8 +306,11 @@ To give you the most accurate legal advice tailored to your nationality, work ex
         const action = ctaBtn.getAttribute('data-action');
         if (action === 'eligibility') {
           const country = ctaBtn.getAttribute('data-country') || 'Canada';
-          if (typeof window.openEligibilityModal === 'function') {
+          const modalEl = document.getElementById('azaleaEligibilityModal');
+          if (modalEl && typeof window.openEligibilityModal === 'function') {
             window.openEligibilityModal(country);
+          } else {
+            window.location.href = `form.html?country=${encodeURIComponent(country)}`;
           }
         } else if (action === 'whatsapp') {
           const topic = ctaBtn.getAttribute('data-topic') || 'Visa Inquiry';

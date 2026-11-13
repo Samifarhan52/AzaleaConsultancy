@@ -2620,3 +2620,178 @@ img[src*="about-visa-image"] {
     font-size: 13px;
   }
 }
+
+
+/* ===================================================================
+ * 17. Dedicated Standalone Form Page (/form)
+ * =================================================================== */
+.azalea-form-section {
+  position: relative;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 60px 0 90px;
+}
+
+.azalea-form-standalone-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.azalea-form-card-header {
+  background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+  padding: 34px 32px 28px;
+  color: #ffffff;
+  position: relative;
+}
+
+.azalea-form-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.azalea-form-stepper .step-pill {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.25s ease;
+}
+
+.azalea-form-stepper .step-pill.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.azalea-form-stepper .step-pill.completed {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #059669;
+}
+
+.azalea-form-stepper .step-pill-line {
+  width: 32px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.azalea-form-card-body {
+  padding: 36px 34px;
+}
+
+.azalea-input-pro,
+.azalea-select-pro {
+  height: 50px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #e2e8f0 !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  color: #1e293b !important;
+  background-color: #f8fafc !important;
+  padding: 0 16px !important;
+  transition: all 0.2s ease !important;
+}
+
+.azalea-input-pro:focus,
+.azalea-select-pro:focus {
+  background-color: #ffffff !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+.azalea-phone-group-pro {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.azalea-phone-group-pro:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  background: #ffffff;
+}
+
+.azalea-phone-group-pro .azalea-dial-code {
+  max-width: 150px;
+  border: none !important;
+  background: #f1f5f9 !important;
+  font-weight: 600;
+  font-size: 13.5px;
+  border-right: 1px solid #e2e8f0 !important;
+  border-radius: 0 !important;
+  padding: 0 12px !important;
+}
+
+.azalea-phone-group-pro input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: 48px !important;
+}
+
+/* Trust Card Sidebar */
+.azalea-form-trust-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 28px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+}
+
+.azalea-form-stat-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.azalea-form-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.azalea-form-badge-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .azalea-form-card-body {
+    padding: 24px 18px;
+  }
+  .azalea-form-card-header {
+    padding: 26px 18px 20px;
+  }
+}
