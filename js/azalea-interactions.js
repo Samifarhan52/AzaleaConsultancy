@@ -201,14 +201,38 @@
     });
   }
 
-  function openEligibilityModal() {
+  function openEligibilityModal(targetCountry) {
     initEligibilityModal();
-    if (eligibilityModal) {
+    if (eligibilityModal || (window.jQuery && typeof window.jQuery('#azaleaEligibilityModal').modal === 'function')) {
       resetWizard();
-      eligibilityModal.show();
-    } else if (window.jQuery && typeof $('#azaleaEligibilityModal').modal === 'function') {
-      resetWizard();
-      $('#azaleaEligibilityModal').modal('show');
+      if (targetCountry) {
+        const countrySelect = document.getElementById('modalTargetCountry');
+        if (countrySelect) {
+          let matched = false;
+          const cleanTarget = targetCountry.trim().toLowerCase();
+          for (let i = 0; i < countrySelect.options.length; i++) {
+            const optVal = countrySelect.options[i].value.toLowerCase();
+            const optText = countrySelect.options[i].text.toLowerCase();
+            if (optVal.includes(cleanTarget) || cleanTarget.includes(optVal) || optText.includes(cleanTarget)) {
+              countrySelect.selectedIndex = i;
+              matched = true;
+              break;
+            }
+          }
+          if (!matched) {
+            const newOpt = document.createElement('option');
+            newOpt.value = targetCountry.trim();
+            newOpt.text = targetCountry.trim() + ' (Specialist Advisory)';
+            newOpt.selected = true;
+            countrySelect.add(newOpt);
+          }
+        }
+      }
+      if (eligibilityModal) {
+        eligibilityModal.show();
+      } else {
+        window.jQuery('#azaleaEligibilityModal').modal('show');
+      }
     }
   }
 
@@ -216,7 +240,9 @@
   document.querySelectorAll('.btn-open-eligibility').forEach((btn) => {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      openEligibilityModal();
+      const country = this.getAttribute('data-country') || 
+                      this.querySelector('.sisf-m-title h3, .sisf-m-title p, h4')?.innerText?.trim();
+      openEligibilityModal(country);
     });
   });
 
@@ -224,7 +250,9 @@
     const trigger = e.target.closest('.btn-open-eligibility');
     if (trigger) {
       e.preventDefault();
-      openEligibilityModal();
+      const country = trigger.getAttribute('data-country') || 
+                      trigger.querySelector('.sisf-m-title h3, .sisf-m-title p, h4')?.innerText?.trim();
+      openEligibilityModal(country);
     }
   });
 
@@ -378,7 +406,11 @@
 
       const waLink = document.getElementById('modalDirectWhatsAppBtn') || document.getElementById('modalWhatsAppBtn');
       if (waLink) {
-        waLink.href = `https://wa.me/97451019991?text=${waMsg}`;
+        const waUrl = `https://wa.me/97451019991?text=${waMsg}`;
+      waLink.href = waUrl;
+      try {
+        window.open(waUrl, '_blank');
+      } catch (err) {}
       }
 
       safeSetStorage('session', 'azalea_modal_shown', 'true');
@@ -509,4 +541,40 @@
   }
   window.addEventListener('load', dismissCurtainPreloader);
   setTimeout(dismissCurtainPreloader, 100);
+
+  // Toggle World Countries in our-countries.html
+  function initWorldCountriesToggle() {
+    const btnToggle = document.getElementById('btnToggleWorldCountries');
+    const section = document.getElementById('worldCountriesSection');
+    if (btnToggle && section) {
+      btnToggle.addEventListener('click', function () {
+        const isHidden = window.getComputedStyle(section).display === 'none';
+        const txt = document.getElementById('btnToggleText');
+        const icon = document.getElementById('btnToggleIcon');
+        if (isHidden) {
+          section.style.display = 'block';
+          if (txt) txt.innerText = 'Collapse Sovereign Destinations';
+          if (icon) {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+          }
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          section.style.display = 'none';
+          if (txt) txt.innerText = 'View More Sovereign Destinations';
+          if (icon) {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+          }
+        }
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWorldCountriesToggle);
+  } else {
+    initWorldCountriesToggle();
+  }
+
 })();
