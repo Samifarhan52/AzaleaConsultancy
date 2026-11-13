@@ -2925,3 +2925,31 @@ img[src*="about-visa-image"] {
     padding: 26px 18px 20px;
   }
 }
+
+/* ===================================================================
+ * 18. Master Footer Dark Luxury Failsafe (Global Consistency)
+ * =================================================================== */
+footer.main-footer,
+.sisf-page-footer-inner-area,
+.sisf-page-background {
+  background-color: #0b132b !important;
+  color: #ffffff !important;
+}
+
+.main-footer .footer-col-title {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+  margin-bottom: 20px !important;
+}
+
+.main-footer .footer-nav-list a {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: all 0.2s ease !important;
+}
+
+.main-footer .footer-nav-list a:hover {
+  color: #60a5fa !important;
+  padding-left: 4px !important;
+}
