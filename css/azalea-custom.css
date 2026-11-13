@@ -2089,3 +2089,11 @@ img[src*="about-visa-image"] {
 #worldCountriesSection {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.card .card-img-top {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.04);
+}
