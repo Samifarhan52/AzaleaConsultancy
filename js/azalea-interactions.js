@@ -526,21 +526,14 @@
     updateSticky();
   }
 
-  // Instant Failsafe Dismissal for Any Legacy Preloader
-  function dismissCurtainPreloader() {
-    const p = document.getElementById('preloader') || document.querySelector('.preloader') || document.querySelector('.sis-preloader');
-    if (p) {
-      p.style.display = 'none';
-      if (p.parentNode) p.parentNode.removeChild(p);
+  // Legacy preloader cleanup only for obsolete templates
+  function cleanupLegacyPreloader() {
+    const legacy = document.querySelector('.sis-preloader');
+    if (legacy && legacy.parentNode) {
+      legacy.parentNode.removeChild(legacy);
     }
   }
-
-  dismissCurtainPreloader();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', dismissCurtainPreloader);
-  }
-  window.addEventListener('load', dismissCurtainPreloader);
-  setTimeout(dismissCurtainPreloader, 100);
+  cleanupLegacyPreloader();
 
   // Toggle World Countries in our-countries.html
   function initWorldCountriesToggle() {

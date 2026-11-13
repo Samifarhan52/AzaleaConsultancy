@@ -1337,6 +1337,15 @@ select::-ms-expand,
   transition: all 800ms cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+.preloader .loader .loader-section.section-left .bg {
+  float: left;
+}
+
+.preloader .loader .loader-section.section-right .bg {
+  float: right;
+  margin-left: auto;
+}
+
 .preloader.loaded .animation-preloader {
   opacity: 0;
   transition: 0.3s ease-out;
@@ -1569,14 +1578,9 @@ body {
   object-fit: cover;
 }
 
-/* Completely disable all blocking preloaders */
-#preloader,
-.preloader,
+/* Legacy preloader cleanup (non-blocking) */
 .sis-preloader {
   display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
 }
 
 /* Completely remove stamp seals */
