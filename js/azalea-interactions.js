@@ -1,5 +1,5 @@
 /**
- * AZALEA IMMIGRATION & CONSULTANCY
+ * AZALEA TOURISM & CONSULTANCY
  * Interactive Additions: Flipping Keywords, Multi-Language Engine, Eligibility Modal
  * Official Email: Info@azaleagroupqa.com | Official WhatsApp: +97451019991
  */
@@ -390,7 +390,7 @@
       document.getElementById('modalResultScore').innerText = `High Match (${score}%)`;
 
       const waMsg = encodeURIComponent(
-        `*AZALEA GLOBAL IMMIGRATION ASSESSMENT*\n` +
+        `*AZALEA GLOBAL VISA ASSESSMENT*\n` +
         `━━━━━━━━━━━━━━━━━━━━━━\n` +
         `• *Case Ref:* ${refCode}\n` +
         `• *Applicant:* ${name}\n` +

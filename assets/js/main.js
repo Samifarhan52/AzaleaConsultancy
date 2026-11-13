@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      alert('Thank you for subscribing! You will receive the latest immigration quotas, policy updates, and visa news.');
+      alert('Thank you for subscribing! You will receive the latest visa quotas, policy updates, and relocation news.');
       newsletterForm.reset();
     });
   }
