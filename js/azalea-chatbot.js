@@ -94,6 +94,15 @@ Walk-ins are welcome, or you can book an appointment in advance via WhatsApp!`,
       cta: { text: 'Connect on WhatsApp Now', action: 'whatsapp', topic: 'Direct Inquiry' }
     },
     {
+      keywords: ['instagram', 'facebook', 'social', 'page', 'socials', 'insta', 'fb', 'follow'],
+      response: `<strong>🌐 Follow Azalea on Social Media:</strong><br><br>
+Stay updated with latest visa draws, immigration rules, and client success milestones:<br>
+• <strong>Instagram:</strong> <a href="https://www.instagram.com/azaleaconsultancyservices?srtk=MXBndWFyMzY3aHJvcA==" target="_blank" rel="noopener noreferrer" class="fw-bold text-primary">@azaleaconsultancyservices</a><br>
+• <strong>Facebook:</strong> <a href="https://www.facebook.com/share/1Cio3toiWn/" target="_blank" rel="noopener noreferrer" class="fw-bold text-primary">Azalea Consultancy Services</a><br>
+• <strong>WhatsApp:</strong> <a href="https://wa.me/97451019991" target="_blank" class="fw-bold text-success">+974 5101 9991</a>`,
+      cta: { text: 'Open Official Instagram', action: 'link', url: 'https://www.instagram.com/azaleaconsultancyservices?srtk=MXBndWFyMzY3aHJvcA==' }
+    },
+    {
       keywords: ['hours', 'timing', 'timings', 'open', 'time', 'sunday', 'saturday'],
       response: `<strong>🕒 Consultation & Working Hours:</strong><br><br>
 • <strong>Monday – Saturday:</strong> 11:00 AM – 7:00 PM<br>
