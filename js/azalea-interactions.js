@@ -734,3 +734,23 @@ window.azaleaExportLeadsToExcel = function () {
     alert('Export failed. Please check browser permissions.');
   }
 };
+
+
+  // Pure Vanilla Dropdown Toggle for Navbar Language Switcher (Zero Popper dependency)
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest("#azaleaNavLangBtn") || e.target.closest(".azalea-lang-pill-btn");
+    const wrap = e.target.closest(".azalea-lang-nav-wrap");
+    if (btn && wrap) {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = wrap.querySelector(".dropdown-menu");
+      const isShowing = wrap.classList.contains("show") || (menu && menu.classList.contains("show"));
+      document.querySelectorAll(".azalea-lang-nav-wrap.show, .azalea-lang-nav-wrap .dropdown-menu.show").forEach((el) => el.classList.remove("show"));
+      if (!isShowing) {
+        wrap.classList.add("show");
+        if (menu) menu.classList.add("show");
+      }
+    } else if (!e.target.closest(".dropdown-menu")) {
+      document.querySelectorAll(".azalea-lang-nav-wrap.show, .azalea-lang-nav-wrap .dropdown-menu.show").forEach((el) => el.classList.remove("show"));
+    }
+  });

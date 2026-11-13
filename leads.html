@@ -273,7 +273,7 @@
                   <div class="sisf-widget-holder sisf--two d-flex align-items-center gap-3">
                      <!-- Navbar Language Switcher Pill (as per reference screenshot) -->
                      <div class="azalea-lang-nav-wrap dropdown">
-                        <button class="azalea-lang-pill-btn dropdown-toggle" type="button" id="azaleaNavLangBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Select Language">
+                        <button class="azalea-lang-pill-btn dropdown-toggle" type="button" id="azaleaNavLangBtn" aria-expanded="false" title="Select Language">
                            <i class="fa-solid fa-globe text-primary"></i>
                            <span class="azalea-current-lang-code">EN</span>
                         </button>
@@ -486,12 +486,13 @@
          // Render Leads Table
          function azaleaRenderLeadsTable() {
             const leads = (window.azaleaGetLeads && window.azaleaGetLeads()) || [];
-            const query = (document.getElementById(leadSearchInput) ? document.getElementById(leadSearchInput).value : ).toLowerCase().trim();
-            const tbody = document.getElementById(leadsTableBody);
-            const totalEl = document.getElementById(statTotalLeads);
-            const phonesEl = document.getElementById(statTotalPhones);
-            const streamEl = document.getElementById(statTopStream);
-            const countEl = document.getElementById(tableRecordCount);
+            const searchEl = document.getElementById('leadSearchInput');
+            const query = (searchEl ? searchEl.value : '').toLowerCase().trim();
+            const tbody = document.getElementById('leadsTableBody');
+            const totalEl = document.getElementById('statTotalLeads');
+            const phonesEl = document.getElementById('statTotalPhones');
+            const streamEl = document.getElementById('statTopStream');
+            const countEl = document.getElementById('tableRecordCount');
 
             if (!tbody) return;
 
@@ -509,8 +510,8 @@
 
             // Update stats
             if (totalEl) totalEl.innerText = leads.length;
-            if (phonesEl) phonesEl.innerText = leads.filter(l => l.mobile && l.mobile !== N/A).length;
-            if (countEl) countEl.innerText = `Showing ${filtered.length} of ${leads.length} leads`;
+            if (phonesEl) phonesEl.innerText = leads.filter(l => l.mobile && l.mobile !== 'N/A').length;
+            if (countEl) countEl.innerText = 'Showing ' + filtered.length + ' of ' + leads.length + ' leads';
 
             if (filtered.length === 0) {
                tbody.innerHTML = `
@@ -518,8 +519,8 @@
                      <td colspan="9" class="text-center py-5 text-muted">
                         <div class="mb-2"><i class="fa-solid fa-folder-open fs-2 text-secondary opacity-50"></i></div>
                         <h6 class="fw-bold text-dark mb-1">No Leads Found</h6>
-                        <p class="small text-muted mb-3">${leads.length === 0 ? "No inquiries have been submitted yet. Click "Add Test Lead" above to test the Excel export." : "No leads match your search query."}</p>
-                        ${leads.length === 0 ? '<button type="button" class="btn btn-sm btn-primary" onclick="azaleaAddTestLead()"><i class="fa-solid fa-plus me-1"></i> Add Test Lead</button>' : ""}
+                        <p class="small text-muted mb-3">${leads.length === 0 ? 'No inquiries have been submitted yet. Click "Add Test Lead" above to test the Excel export.' : 'No leads match your search query.'}</p>
+                        ${leads.length === 0 ? '<button type="button" class="btn btn-sm btn-primary" onclick="azaleaAddTestLead()"><i class="fa-solid fa-plus me-1"></i> Add Test Lead</button>' : ''}
                      </td>
                   </tr>
                `;
