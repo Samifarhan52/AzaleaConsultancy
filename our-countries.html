@@ -35,7 +35,7 @@
       <link href="css/custom.css" rel="stylesheet" media="screen">
    
       <!-- Azalea Custom Extensions -->
-      <link rel="stylesheet" href="css/azalea-custom.css?v=4.3">
+      <link rel="stylesheet" href="css/azalea-custom.css?v=4.4">
       <style id="azalea-modal-failsafe-css">
          /* Failsafe Z-Index: Ensure Modal Popup is ALWAYS in front of all headers and overlays */
          .modal.azalea-modal,
@@ -232,37 +232,83 @@
          </div>
       </header>
       <!-- Header New End -->
-      <!-- Banner Section Start -->
-      <div class="sisf-banner position-relative">
-         <div class="banner-img">
-            <figure>
-               <img src="images/page-banner.png" alt="Azalea Tourism &amp; Consultancy">
-            </figure>
-         </div>
-         <div class="sisf-page-title sisf-m sisf-title--standard sisf-alignment--center">
-            <div class="sisf-m-inner container">
-               <div class="sisf-breadcrumbs mb-2">
-                  <a class="sisf-breadcrumbs-link text-white" href="index.html">
-                  <span>Home</span>
-                  </a>
-                  <span class="sisf-breadcrumbs-separator text-white mx-2"><i class="fa-solid fa-chevron-right"></i></span>
-                  <span class="sisf-breadcrumbs-current text-white">Destinations</span>
+      <!-- Executive Destinations Hero Section Start -->
+      <div class="azalea-destinations-hero position-relative text-center text-white">
+         <div class="container position-relative" style="z-index: 2;">
+            <!-- Breadcrumbs -->
+            <div class="d-flex align-items-center justify-content-center gap-2 mb-3" data-aos="fade-down" data-aos-delay="100">
+               <a href="index.html" class="text-white-50 text-decoration-none small hover-white">
+                  <i class="fa-solid fa-house me-1"></i> Home
+               </a>
+               <span class="text-white-50">&bull;</span>
+               <span class="text-white small fw-bold">Sovereign Destinations</span>
+            </div>
+
+            <!-- Trust Badge -->
+            <div class="mb-3" data-aos="fade-up" data-aos-delay="150">
+               <div class="azalea-hero-badge">
+                  <i class="fa-solid fa-award"></i>
+                  <span>Accredited Sovereign Legal Representation &bull; Doha Headquarters</span>
                </div>
-               <div class="sisf-m-content sisf-content-grid">
-                  <h1 class="sisf-m-title text-white sis-text-anime-style-3 entry-title">Global Relocation Destinations</h1>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="azalea-hero-title mb-3" data-aos="fade-up" data-aos-delay="200">
+               Global Relocation &amp; <span class="text-gold">Sovereign Pathways</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="azalea-hero-subtitle mb-4" data-aos="fade-up" data-aos-delay="250">
+               From Canadian Express Entry and German Chancenkarte to UAE 10-Year Golden Visas &mdash; Azalea provides certified legal representation, statutory petition drafting, and consular stamping directly from Doha across 150+ international jurisdictions.
+            </p>
+
+            <!-- Metric Stats Ribbon -->
+            <div class="row g-3 justify-content-center my-4" data-aos="fade-up" data-aos-delay="300">
+               <div class="col-6 col-md-3">
+                  <div class="azalea-hero-stat-card">
+                     <div class="stat-num" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">150+</div>
+                     <div class="stat-label">Sovereign Destinations</div>
+                  </div>
                </div>
+               <div class="col-6 col-md-3">
+                  <div class="azalea-hero-stat-card">
+                     <div class="stat-num text-success">99%</div>
+                     <div class="stat-label">Visa Approval Rate</div>
+                  </div>
+               </div>
+               <div class="col-6 col-md-3">
+                  <div class="azalea-hero-stat-card">
+                     <div class="stat-num text-info">16+ Yrs</div>
+                     <div class="stat-label">Regulatory Experience</div>
+                  </div>
+               </div>
+               <div class="col-6 col-md-3">
+                  <div class="azalea-hero-stat-card">
+                     <div class="stat-num text-warning">Doha HQ</div>
+                     <div class="stat-label">Direct Legal Counsel</div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 mt-4" data-aos="fade-up" data-aos-delay="350">
+               <a href="#destinations-grid" class="sis-btn-default py-3 px-4 fw-bold shadow-lg d-inline-flex align-items-center gap-2" style="font-size: 1rem;">
+                  <i class="fa-solid fa-compass"></i> Explore 50+ Destinations <i class="fa-solid fa-arrow-down ms-1"></i>
+               </a>
+               <a href="javascript:void(0)" class="btn-open-eligibility btn btn-outline-light py-3 px-4 fw-bold rounded-pill d-inline-flex align-items-center gap-2" style="font-size: 1rem; border-width: 2px;">
+                  <i class="fa-solid fa-clipboard-check text-warning"></i> Check Visa Eligibility in 5 Mins <i class="fa-solid fa-arrow-right-long ms-1"></i>
+               </a>
             </div>
          </div>
       </div>
-      <!-- Banner Section End -->
+      <!-- Executive Destinations Hero Section End -->
 
       <!-- Destinations Intro -->
-      <!-- Destinations Intro -->
-      <div class="sis-popular-destination-section py-5">
+      <div class="sis-popular-destination-section py-5" id="destinations-grid">
          <div class="container py-4">
             <div class="row justify-content-center text-center mb-5">
                <div class="col-lg-8">
-                  <span class="sisf-subtitle sisf-e-colored hero-pill-badge mb-2"><i class="fa-solid fa-earth-americas me-2"></i> 150+ Partner Countries</span>
+                  <span class="sisf-subtitle sisf-e-colored hero-pill-badge mb-2"><i class="fa-solid fa-earth-americas me-2"></i> Tier-1 Global Jurisdictions</span>
                   <h2 class="fw-bold text-dark mb-3">Popular Relocation &amp; Immigration Destinations</h2>
                   <p class="text-muted">Explore legal immigration pathways, statutory processes, and sovereign visa grants for leading global destinations.</p>
                </div>
@@ -271,14 +317,20 @@
             <div class="row g-4 mb-4">
                <!-- Canada -->
                <div class="col-lg-4 col-md-6" id="canada">
-                  <div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                     <img src="images/dest-canada.jpg" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Canada Immigration">
+                  <div class="card country-card-pro h-100 border-0 shadow-sm">
+                     <div class="card-img-wrap">
+                        <img src="images/dest-canada.jpg" alt="Canada Immigration &amp; Express Entry">
+                        <div class="country-tag-badge">
+                           <img src="images/location1.svg" alt="Canada Flag">
+                           <span>Canada</span>
+                        </div>
+                        <span class="badge bg-primary text-white position-absolute top-0 end-0 m-3 py-2 px-3 rounded-pill shadow-sm" style="font-size: 0.75rem;">Top Choice</span>
+                     </div>
                      <div class="card-body p-4 d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                           <h4 class="fw-bold text-dark mb-0">Canada</h4>
-                           <span class="badge bg-primary text-white">Top Choice</span>
+                           <h4 class="fw-bold text-dark mb-0">Canada Express Entry &amp; PNP</h4>
                         </div>
-                        <p class="small text-muted mb-3">Express Entry (FSW, CEC), Provincial Nominee Programs (PNP Ontario, BC, Alberta), and LMIA Work Permits.</p>
+                        <p class="small text-muted mb-3">Federal Skilled Worker (FSW), Canadian Experience Class (CEC), Provincial Nominee Programs (OINP, BC PNP, AAIP), and LMIA Work Permits.</p>
                         
                         <div class="country-legal-specs mb-3 mt-auto">
                            <div class="mb-2 pb-2 border-bottom">
@@ -295,21 +347,27 @@
                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility" data-country="Canada">Check Canada Eligibility</a>
+                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility py-2 fw-bold" data-country="Canada">Check Canada Eligibility <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                      </div>
                   </div>
                </div>
 
                <!-- United Kingdom -->
                <div class="col-lg-4 col-md-6" id="uk">
-                  <div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                     <img src="images/dest-uk.jpg" class="card-img-top" style="height: 220px; object-fit: cover;" alt="United Kingdom Visas">
+                  <div class="card country-card-pro h-100 border-0 shadow-sm">
+                     <div class="card-img-wrap">
+                        <img src="images/dest-uk.jpg" alt="United Kingdom Skilled Worker">
+                        <div class="country-tag-badge">
+                           <img src="images/location5.svg" alt="UK Flag">
+                           <span>United Kingdom</span>
+                        </div>
+                        <span class="badge bg-success text-white position-absolute top-0 end-0 m-3 py-2 px-3 rounded-pill shadow-sm" style="font-size: 0.75rem;">High Quotas</span>
+                     </div>
                      <div class="card-body p-4 d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                           <h4 class="fw-bold text-dark mb-0">United Kingdom</h4>
-                           <span class="badge bg-success text-white">High Quotas</span>
+                           <h4 class="fw-bold text-dark mb-0">UK Skilled Worker &amp; Expansion</h4>
                         </div>
-                        <p class="small text-muted mb-3">Skilled Worker Visa, Health &amp; Care Worker, Global Talent Visa, and Innovator Founder pathways.</p>
+                        <p class="small text-muted mb-3">Skilled Worker Visa, Health &amp; Care Worker, Global Talent Visa, and UK Expansion Worker sponsor licence pathways.</p>
                         
                         <div class="country-legal-specs mb-3 mt-auto">
                            <div class="mb-2 pb-2 border-bottom">
@@ -326,21 +384,27 @@
                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility" data-country="United Kingdom">Check UK Eligibility</a>
+                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility py-2 fw-bold" data-country="United Kingdom">Check UK Eligibility <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                      </div>
                   </div>
                </div>
 
                <!-- Australia -->
                <div class="col-lg-4 col-md-6" id="australia">
-                  <div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                     <img src="images/dest-australia.jpg" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Australia Visas">
+                  <div class="card country-card-pro h-100 border-0 shadow-sm">
+                     <div class="card-img-wrap">
+                        <img src="images/dest-australia.jpg" alt="Australia Skilled Migration">
+                        <div class="country-tag-badge">
+                           <img src="images/location2.svg" alt="Australia Flag">
+                           <span>Australia</span>
+                        </div>
+                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 py-2 px-3 rounded-pill shadow-sm" style="font-size: 0.75rem;">High Salaries</span>
+                     </div>
                      <div class="card-body p-4 d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                           <h4 class="fw-bold text-dark mb-0">Australia</h4>
-                           <span class="badge bg-warning text-dark">High Salaries</span>
+                           <h4 class="fw-bold text-dark mb-0">Australia GSM &amp; Subclass 189/190</h4>
                         </div>
-                        <p class="small text-muted mb-3">General Skilled Migration (Subclass 189, 190, 491) and Employer Nomination Scheme (Subclass 186).</p>
+                        <p class="small text-muted mb-3">General Skilled Migration (Subclass 189, 190, 491) and Employer Nomination Scheme (Subclass 186/482 TSS).</p>
                         
                         <div class="country-legal-specs mb-3 mt-auto">
                            <div class="mb-2 pb-2 border-bottom">
@@ -357,21 +421,27 @@
                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility" data-country="Australia">Check Australia Eligibility</a>
+                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility py-2 fw-bold" data-country="Australia">Check Australia Eligibility <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                      </div>
                   </div>
                </div>
 
                <!-- Germany & Schengen -->
                <div class="col-lg-4 col-md-6" id="germany">
-                  <div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                     <img src="images/dest-germany.jpg" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Germany Chancenkarte">
+                  <div class="card country-card-pro h-100 border-0 shadow-sm">
+                     <div class="card-img-wrap">
+                        <img src="images/dest-germany.jpg" alt="Germany Opportunity Card &amp; EU Blue Card">
+                        <div class="country-tag-badge">
+                           <img src="images/location3.svg" alt="Germany Flag">
+                           <span>Germany &amp; EU</span>
+                        </div>
+                        <span class="badge bg-info text-white position-absolute top-0 end-0 m-3 py-2 px-3 rounded-pill shadow-sm" style="font-size: 0.75rem;">Chancenkarte</span>
+                     </div>
                      <div class="card-body p-4 d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                           <h4 class="fw-bold text-dark mb-0">Germany &amp; EU</h4>
-                           <span class="badge bg-info text-white">Chancenkarte</span>
+                           <h4 class="fw-bold text-dark mb-0">Germany Opportunity Card &amp; Blue Card</h4>
                         </div>
-                        <p class="small text-muted mb-3">Opportunity Card (Chancenkarte), EU Blue Card, Job Seeker, and Schengen Visas across 29 EU nations.</p>
+                        <p class="small text-muted mb-3">Opportunity Card (Chancenkarte), EU Blue Card, Job Seeker, and Schengen Visas across 29 EU member nations.</p>
                         
                         <div class="country-legal-specs mb-3 mt-auto">
                            <div class="mb-2 pb-2 border-bottom">
@@ -388,19 +458,25 @@
                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility" data-country="Germany">Check Germany Eligibility</a>
+                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility py-2 fw-bold" data-country="Germany">Check Germany Eligibility <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                      </div>
                   </div>
                </div>
 
                <!-- United States -->
                <div class="col-lg-4 col-md-6" id="usa">
-                  <div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                     <img src="images/dest-usa.jpg" class="card-img-top" style="height: 220px; object-fit: cover;" alt="United States Visas">
+                  <div class="card country-card-pro h-100 border-0 shadow-sm">
+                     <div class="card-img-wrap">
+                        <img src="images/dest-usa.jpg" alt="United States Visas &amp; EB-2">
+                        <div class="country-tag-badge">
+                           <img src="images/location4.svg" alt="US Flag">
+                           <span>United States</span>
+                        </div>
+                        <span class="badge bg-secondary text-white position-absolute top-0 end-0 m-3 py-2 px-3 rounded-pill shadow-sm" style="font-size: 0.75rem;">EB-2 / EB-5</span>
+                     </div>
                      <div class="card-body p-4 d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                           <h4 class="fw-bold text-dark mb-0">United States</h4>
-                           <span class="badge bg-secondary text-white">EB-2 / EB-5</span>
+                           <h4 class="fw-bold text-dark mb-0">US EB-2 NIW &amp; Investor Visas</h4>
                         </div>
                         <p class="small text-muted mb-3">EB-2 National Interest Waiver (NIW), EB-5 Immigrant Investor, L-1 Intra-Company, and B1/B2 Visas.</p>
                         
@@ -419,21 +495,27 @@
                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility" data-country="United States">Check US Eligibility</a>
+                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility py-2 fw-bold" data-country="United States">Check US Eligibility <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                      </div>
                   </div>
                </div>
 
                <!-- UAE & Gulf -->
                <div class="col-lg-4 col-md-6" id="uae">
-                  <div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-                     <img src="images/dest-uae.jpg" class="card-img-top" style="height: 220px; object-fit: cover;" alt="UAE &amp; Gulf Golden Visa">
+                  <div class="card country-card-pro h-100 border-0 shadow-sm">
+                     <div class="card-img-wrap">
+                        <img src="images/dest-uae.jpg" alt="UAE 10-Year Golden Visa">
+                        <div class="country-tag-badge">
+                           <img src="images/location-uae.svg" alt="UAE Flag">
+                           <span>UAE &amp; Gulf</span>
+                        </div>
+                        <span class="badge bg-dark text-white position-absolute top-0 end-0 m-3 py-2 px-3 rounded-pill shadow-sm" style="font-size: 0.75rem;">10-Yr Golden</span>
+                     </div>
                      <div class="card-body p-4 d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                           <h4 class="fw-bold text-dark mb-0">UAE &amp; Gulf</h4>
-                           <span class="badge bg-dark text-white">10-Yr Golden</span>
+                           <h4 class="fw-bold text-dark mb-0">UAE 10-Year Golden &amp; Green Visas</h4>
                         </div>
-                        <p class="small text-muted mb-3">UAE 10-Year Golden Visa, Green Visa, Corporate Investor, and Freelance Residence permits.</p>
+                        <p class="small text-muted mb-3">UAE 10-Year Golden Visa, Green Visa, Corporate Investor, Real Estate Investor, and Freelance Residence permits.</p>
                         
                         <div class="country-legal-specs mb-3 mt-auto">
                            <div class="mb-2 pb-2 border-bottom">
@@ -450,7 +532,7 @@
                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility" data-country="UAE &amp; Dubai">Check UAE Eligibility</a>
+                        <a href="javascript:void(0)" class="sis-btn-default w-100 text-center btn-open-eligibility py-2 fw-bold" data-country="UAE &amp; Dubai">Check UAE Eligibility <i class="fa-solid fa-arrow-right-long ms-1"></i></a>
                      </div>
                   </div>
                </div>
@@ -1460,7 +1542,7 @@
       </div>
 
       <!-- Azalea Interactions Script -->
-      <script src="js/azalea-interactions.js?v=4.3"></script>
+      <script src="js/azalea-interactions.js?v=4.4"></script>
 
    </body>
 </html>
