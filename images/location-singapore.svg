@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="none" viewBox="0 0 72 72">
+  <defs>
+    <clipPath id="sg-clip">
+      <path fill="#fff" d="M0 36C0 16.118 16.118 0 36 0s36 16.118 36 36-16.118 36-36 36S0 55.882 0 36"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#sg-clip)">
+    <!-- Top Red -->
+    <rect x="0" y="0" width="72" height="36" fill="#ed2939"/>
+    <!-- Bottom White -->
+    <rect x="0" y="36" width="72" height="36" fill="#ffffff"/>
+    <!-- Crescent -->
+    <circle cx="18" cy="18" r="9" fill="#ffffff"/>
+    <circle cx="21" cy="18" r="8" fill="#ed2939"/>
+    <!-- 5 Stars -->
+    <circle cx="25" cy="13" r="1.5" fill="#ffffff"/>
+    <circle cx="28" cy="16" r="1.5" fill="#ffffff"/>
+    <circle cx="27" cy="21" r="1.5" fill="#ffffff"/>
+    <circle cx="23" cy="22" r="1.5" fill="#ffffff"/>
+    <circle cx="23" cy="15" r="1.5" fill="#ffffff"/>
+  </g>
+</svg>
