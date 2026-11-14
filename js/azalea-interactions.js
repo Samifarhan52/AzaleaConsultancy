@@ -5,7 +5,7 @@
  */
 
 // Global Google Sheets Webhook URL for real-time lead capture
-window.AZALEA_GOOGLE_SHEETS_WEBHOOK = window.AZALEA_GOOGLE_SHEETS_WEBHOOK || localStorage.getItem('azalea_leads_webhook_url') || '';
+window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycby8XzJ0f_lbxGZq0QFzSJxXpn4p81oZ7DZmj9ua1yV4B1EEeBSC4C-sGKf5rqZtGLbc/exec";
 
 (function () {
   'use strict';
@@ -451,6 +451,20 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = window.AZALEA_GOOGLE_SHEETS_WEBHOOK || loc
       if (!name || !email || !phone) {
         alert('Please fill in your name, email, and phone number.');
         return;
+      }
+
+      // Automatically sync contact inquiry to Google Sheet
+      if (window.azaleaSaveLead) {
+        window.azaleaSaveLead({
+          name: name,
+          email: email,
+          mobile: fullPhone,
+          targetCountry: country,
+          visaInterest: visa,
+          source: 'Contact Page Inquiry Form',
+          timeline: 'Immediate Consultation',
+          status: 'Active Contact Inquiry'
+        });
       }
 
       const waText = encodeURIComponent(
