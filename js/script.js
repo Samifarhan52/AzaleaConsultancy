@@ -3,9 +3,9 @@
     const $window = $(window);
     const CONFIG = { mobileBreakpoint: 768, formAction: ["form-process.php", "review-form.php"] };
 
-    // Signature Azalea Entry Reveal Animation Loader
+    // Signature Azalea Entry Reveal Animation Loader (Official Logo Edition)
     function initAzaleaPreloader() {
-        const $preloader = $('#preloader, .preloader');
+        const $preloader = $('#preloader, .preloader, .azalea-entry-reveal');
         if (!$preloader.length) return;
 
         let dismissed = false;
@@ -14,20 +14,20 @@
             dismissed = true;
             $preloader.addClass('loaded');
             setTimeout(function () {
-                $preloader.fadeOut(500, function () {
+                $preloader.fadeOut(400, function () {
                     $(this).css('display', 'none');
                 });
                 $('body, html').css({ 'overflow-y': 'auto', 'overflow-x': 'hidden' });
-            }, 600);
+            }, 650);
         }
 
-        // Wait for letters reveal sequence for smooth entry satisfaction
+        // Wait for logo reveal shimmer and flight progress
         $window.on('load', function () {
-            setTimeout(finishLoading, 750);
+            setTimeout(finishLoading, 700);
         });
 
-        // Failsafe: Ensure page is always revealed smoothly
-        setTimeout(finishLoading, 2000);
+        // Failsafe: Ensure page is always revealed smoothly within 1.5s
+        setTimeout(finishLoading, 1500);
     }
 
     initAzaleaPreloader();

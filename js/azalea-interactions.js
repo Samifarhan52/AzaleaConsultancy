@@ -259,10 +259,35 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
     }
   });
 
-  // Auto popup for visitors when they arrive on the website (after 1.8 seconds)
+  // Auto popup for visitors: ONLY ON HOME PAGE, AND ONLY ONCE PER VISIT
+  function isHomePage() {
+    const p = (window.location.pathname || '').toLowerCase();
+    // Subpages where auto popup is strictly disabled
+    const subpages = ['about-us', 'service', 'our-countries', 'contact', 'faq', 'form', 'privacy-policy', 'terms-conditions'];
+    for (let i = 0; i < subpages.length; i++) {
+      if (p.indexOf(subpages[i]) !== -1) {
+        return false;
+      }
+    }
+    return p === '/' || p === '' || p.endsWith('/index.html') || p.endsWith('/index') || (window.location.protocol === 'file:' && p.endsWith('index.html'));
+  }
+
   function triggerWelcomePopup() {
+    // Strictly verify home page
+    if (!isHomePage()) {
+      return;
+    }
+
+    // Strictly verify shown only once per user
+    const alreadyShown = safeGetStorage('local', 'azalea_home_popup_shown') || safeGetStorage('session', 'azalea_home_popup_shown');
+    if (alreadyShown) {
+      return;
+    }
+
     if (!document.querySelector('.modal.show')) {
       openEligibilityModal();
+      safeSetStorage('local', 'azalea_home_popup_shown', 'true');
+      safeSetStorage('session', 'azalea_home_popup_shown', 'true');
     }
   }
 
