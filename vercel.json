@@ -4,6 +4,11 @@
   "rewrites": [
     { "source": "/form", "destination": "/form.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/terms-conditions", "destination": "/terms-conditions.html" }
+    { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
+    { "source": "/about-us", "destination": "/about-us.html" },
+    { "source": "/service", "destination": "/service.html" },
+    { "source": "/our-countries", "destination": "/our-countries.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/faq", "destination": "/faq.html" }
   ]
 }

@@ -2,7 +2,7 @@
 # AZALEA TOURISM & CONSULTANCY - HOSTINGER / APACHE PRODUCTION CONFIG
 # ====================================================================
 
-# Force index.html as the primary homepage (Overriding old WordPress index.php)
+# Force index.html as the primary homepage
 DirectoryIndex index.html index.php index.htm
 
 # Enable URL Rewriting
@@ -14,17 +14,30 @@ DirectoryIndex index.html index.php index.htm
     RewriteCond %{HTTPS} !=on
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 2. Clean Dedicated Routes
+    # 2. Canonical Clean URL: Redirect /index.html directly to /
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.html\ HTTP/ [NC]
+    RewriteRule ^(.*)index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # 3. Canonical Clean URL: Redirect any request with .html extension to clean URL
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\s?]+)\.html[\s?] [NC]
+    RewriteRule ^([^\s?]+)\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # 4. Clean Dedicated Routes
     RewriteRule ^form/?$ form.html [L,QSA]
     RewriteRule ^privacy-policy/?$ privacy-policy.html [L,QSA]
     RewriteRule ^terms-conditions/?$ terms-conditions.html [L,QSA]
+    RewriteRule ^about-us/?$ about-us.html [L,QSA]
+    RewriteRule ^service/?$ service.html [L,QSA]
+    RewriteRule ^our-countries/?$ our-countries.html [L,QSA]
+    RewriteRule ^contact/?$ contact.html [L,QSA]
+    RewriteRule ^faq/?$ faq.html [L,QSA]
 
-    # 3. Clean URLs (Serve .html without showing extension in URL)
+    # 5. Internal Mapping: Serve .html file silently when clean URL is requested
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.html -f
-    RewriteRule ^(.*)$ $1.html [L,QSA]
+    RewriteRule ^([^\s]+)/?$ $1.html [L,QSA]
 
-    # 4. Fallback 404
+    # 6. Fallback 404
     ErrorDocument 404 /index.html
 </IfModule>
 
