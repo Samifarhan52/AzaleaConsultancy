@@ -608,19 +608,57 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
  * AZALEA LANGUAGE SWITCHER (NAVBAR SPEC)
  * =================================================================== */
 window.azaleaSwitchLanguage = function (lang) {
-  const cleanLang = (lang || 'en').toLowerCase();
-  document.cookie = `googtrans=/en/${cleanLang}; path=/;`;
-  document.cookie = `googtrans=/en/${cleanLang}; path=/; domain=${window.location.hostname};`;
+  const cleanLang = (lang || 'en');
+  const code = (cleanLang === 'zh-CN' ? 'ZH' : cleanLang.toUpperCase());
 
-  const code = cleanLang.toUpperCase();
+  // RTL / LTR layout switching
+  if (cleanLang === 'ar' || cleanLang === 'ur') {
+    document.documentElement.setAttribute('dir', 'rtl');
+    document.documentElement.setAttribute('lang', cleanLang);
+    document.body.classList.add('rtl-layout');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+    document.documentElement.setAttribute('lang', cleanLang);
+    document.body.classList.remove('rtl-layout');
+  }
+
+  // Update current language code on all pills (desktop & mobile)
   document.querySelectorAll('.azalea-current-lang-code').forEach((el) => {
     el.innerText = code;
   });
 
+  // Highlight active item in all dropdown menus
+  document.querySelectorAll('.azalea-lang-nav-wrap .dropdown-item').forEach((item) => {
+    const isThis = item.getAttribute('data-lang') === cleanLang;
+    item.classList.toggle('active', isThis);
+  });
+
+  // Close open dropdowns
+  document.querySelectorAll('.azalea-lang-nav-wrap').forEach((w) => w.classList.remove('show'));
+
+  // Store preference
   try {
     localStorage.setItem('azalea_pref_lang', cleanLang);
   } catch (e) {}
 
+  // Google Translate cookies
+  try {
+    if (cleanLang === 'en') {
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      if (window.location.hostname) {
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname}`;
+      }
+    } else {
+      document.cookie = `googtrans=/en/${cleanLang}; path=/;`;
+      if (window.location.hostname) {
+        document.cookie = `googtrans=/en/${cleanLang}; path=/; domain=${window.location.hostname}`;
+        document.cookie = `googtrans=/en/${cleanLang}; path=/; domain=.${window.location.hostname}`;
+      }
+    }
+  } catch (e) {}
+
+  // Trigger Google Translate Combo
   const gtCombo = document.querySelector('.goog-te-combo');
   if (gtCombo) {
     gtCombo.value = cleanLang;
@@ -630,13 +668,21 @@ window.azaleaSwitchLanguage = function (lang) {
   }
 };
 
-// Sync Language Badge on Load
+// Sync Language Badge & RTL on Load
 try {
   const savedLang = localStorage.getItem('azalea_pref_lang') || (document.cookie.match(/googtrans=\/en\/([a-z-]+)/i) || [])[1];
   if (savedLang) {
-    const code = savedLang.toUpperCase();
+    const code = (savedLang === 'zh-CN' ? 'ZH' : savedLang.toUpperCase());
     document.querySelectorAll('.azalea-current-lang-code').forEach((el) => {
       el.innerText = code;
+    });
+    if (savedLang === 'ar' || savedLang === 'ur') {
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.documentElement.setAttribute('lang', savedLang);
+      document.body.classList.add('rtl-layout');
+    }
+    document.querySelectorAll('.azalea-lang-nav-wrap .dropdown-item').forEach((item) => {
+      item.classList.toggle('active', item.getAttribute('data-lang') === savedLang);
     });
   }
 } catch (e) {}

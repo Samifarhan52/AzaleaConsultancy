@@ -3210,8 +3210,12 @@ footer.main-footer,
   top: calc(100% + 8px) !important;
   right: 0 !important;
   left: auto !important;
-  z-index: 10000 !important;
-  min-width: 175px !important;
+  z-index: 100000 !important;
+  min-width: 210px !important;
+  max-height: 380px !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  background: #ffffff !important;
 }
 
 .azalea-lang-nav-wrap.show .dropdown-menu,
@@ -3219,4 +3223,45 @@ footer.main-footer,
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+.azalea-lang-scroll-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.azalea-lang-scroll-menu::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+.azalea-lang-scroll-menu::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+.azalea-lang-scroll-menu::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+@media (min-width: 992px) {
+  .azalea-lang-nav-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .azalea-lang-nav-mobile {
+    display: block !important;
+  }
+  .azalea-mobile-header-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-left: auto !important;
+    z-index: 1000 !important;
+  }
+  .azalea-lang-nav-mobile .dropdown-menu {
+    position: absolute !important;
+    right: 0 !important;
+    left: auto !important;
+    top: calc(100% + 8px) !important;
+    min-width: 215px !important;
+  }
 }

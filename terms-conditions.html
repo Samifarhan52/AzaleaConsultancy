@@ -160,27 +160,6 @@
                                  <span>Mon - Sat: 11:00 AM - 7:00 PM</span>
                                  </a>
                               </div>
-                              <!-- Multi-Language Dropdown -->
-                              <div class="azalea-lang-selector notranslate" translate="no">
-                                 <button type="button" class="azalea-lang-btn notranslate" id="azaleaLangDropdownBtn" translate="no" title="Change Language">
-                                    <span id="currentLangFlag"><i class="fa-solid fa-globe text-primary pe-1"></i></span> <span id="currentLangName" class="notranslate" translate="no">English</span> <i class="fa-solid fa-angle-down ms-1"></i>
-                                 </button>
-                                 <div class="azalea-lang-menu notranslate" id="azaleaLangDropdownMenu" translate="no">
-                                    <a href="javascript:void(0)" class="azalea-lang-item active notranslate" translate="no" data-lang="en" data-flag="globe" data-name="English"><span><strong>English</strong> (Default)</span> <span class="badge bg-primary text-white ms-auto py-1 px-2" style="font-size: 0.68rem;">Default</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="ar" data-flag="globe" data-name="Arabic"><span><strong>Arabic</strong> (العربية)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="pt" data-flag="globe" data-name="Portuguese"><span><strong>Portuguese</strong> (Português)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="es" data-flag="globe" data-name="Spanish"><span><strong>Spanish</strong> (Español)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="fr" data-flag="globe" data-name="French"><span><strong>French</strong> (Français)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="de" data-flag="globe" data-name="German"><span><strong>German</strong> (Deutsch)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="hi" data-flag="globe" data-name="Hindi"><span><strong>Hindi</strong> (हिन्दी)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="ur" data-flag="globe" data-name="Urdu"><span><strong>Urdu</strong> (اردو)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="tr" data-flag="globe" data-name="Turkish"><span><strong>Turkish</strong> (Türkçe)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="zh-CN" data-flag="globe" data-name="Chinese"><span><strong>Chinese</strong> (中文)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="ru" data-flag="globe" data-name="Russian"><span><strong>Russian</strong> (Русский)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="it" data-flag="globe" data-name="Italian"><span><strong>Italian</strong> (Italiano)</span></a>
-                                    <a href="javascript:void(0)" class="azalea-lang-item notranslate" translate="no" data-lang="ja" data-flag="globe" data-name="Japanese"><span><strong>Japanese</strong> (日本語)</span></a>
-                                 </div>
-                              </div>
                               <div id="google_translate_element" class="notranslate" translate="no" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;"></div>
                            </div>
                            <div class="social-icons-link">
@@ -267,22 +246,54 @@
                   <div class="sisf-widget-holder sisf--two d-flex align-items-center gap-3">
                      <!-- Navbar Language Switcher Pill (as per reference screenshot) -->
                      <div class="azalea-lang-nav-wrap dropdown">
-                        <button class="azalea-lang-pill-btn dropdown-toggle" type="button" id="azaleaNavLangBtn" aria-expanded="false" title="Select Language">
-                           <i class="fa-solid fa-globe text-primary"></i>
-                           <span class="azalea-current-lang-code">EN</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 p-2" aria-labelledby="azaleaNavLangBtn" style="min-width: 170px;">
-                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2 active" href="javascript:void(0)" onclick="azaleaSwitchLanguage('en')"><span class="fs-6">🇬🇧</span> English (EN)</a></li>
-                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ar')"><span class="fs-6">🇶🇦</span> العربية (AR)</a></li>
-                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('tr')"><span class="fs-6">🇹🇷</span> Türkçe (TR)</a></li>
-                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('fr')"><span class="fs-6">🇫🇷</span> Français (FR)</a></li>
-                           <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('de')"><span class="fs-6">🇩🇪</span> Deutsch (DE)</a></li>
-                        </ul>
-                     </div>
+                         <button class="azalea-lang-pill-btn dropdown-toggle" type="button" id="azaleaNavLangBtn" aria-expanded="false" title="Select Language">
+                            <i class="fa-solid fa-globe text-primary"></i>
+                            <span class="azalea-current-lang-code">EN</span>
+                         </button>
+                         <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 p-2 azalea-lang-scroll-menu" aria-labelledby="azaleaNavLangBtn" style="min-width: 215px; max-height: 380px; overflow-y: auto;">
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center justify-content-between active" href="javascript:void(0)" onclick="azaleaSwitchLanguage('en')" data-lang="en"><span><strong>English</strong> (Default)</span> <span class="badge bg-primary text-white py-1 px-2" style="font-size: 0.65rem;">Default</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ar')" data-lang="ar"><span><strong>Arabic</strong> (العربية)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('pt')" data-lang="pt"><span><strong>Portuguese</strong> (Português)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('es')" data-lang="es"><span><strong>Spanish</strong> (Español)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('fr')" data-lang="fr"><span><strong>French</strong> (Français)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('de')" data-lang="de"><span><strong>German</strong> (Deutsch)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('hi')" data-lang="hi"><span><strong>Hindi</strong> (हिन्दी)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ur')" data-lang="ur"><span><strong>Urdu</strong> (اردو)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('tr')" data-lang="tr"><span><strong>Turkish</strong> (Türkçe)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('zh-CN')" data-lang="zh-CN"><span><strong>Chinese</strong> (中文)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ru')" data-lang="ru"><span><strong>Russian</strong> (Русский)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('it')" data-lang="it"><span><strong>Italian</strong> (Italiano)</span></a></li>
+                            <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ja')" data-lang="ja"><span><strong>Japanese</strong> (日本語)</span></a></li>
+                         </ul>
+                      </div>
                      <div class="header-btn"><a href="form.html" class="sis-btn-default shadow-none">Free Eligibility Check<i class="fa-solid fa-arrow-right-long"></i></a></div>
                   </div>
                </div>
-               <div class="navbar-toggle"></div>
+               <div class="azalea-mobile-header-right d-flex align-items-center gap-2">
+                   <!-- Navbar Language Switcher Pill (Mobile) -->
+                   <div class="azalea-lang-nav-wrap dropdown azalea-lang-nav-mobile">
+                      <button class="azalea-lang-pill-btn dropdown-toggle" type="button" aria-expanded="false" title="Select Language">
+                         <i class="fa-solid fa-globe text-primary"></i>
+                         <span class="azalea-current-lang-code">EN</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 p-2 azalea-lang-scroll-menu" style="min-width: 215px; max-height: 380px; overflow-y: auto;">
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center justify-content-between active" href="javascript:void(0)" onclick="azaleaSwitchLanguage('en')" data-lang="en"><span><strong>English</strong> (Default)</span> <span class="badge bg-primary text-white py-1 px-2" style="font-size: 0.65rem;">Default</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ar')" data-lang="ar"><span><strong>Arabic</strong> (العربية)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('pt')" data-lang="pt"><span><strong>Portuguese</strong> (Português)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('es')" data-lang="es"><span><strong>Spanish</strong> (Español)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('fr')" data-lang="fr"><span><strong>French</strong> (Français)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('de')" data-lang="de"><span><strong>German</strong> (Deutsch)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('hi')" data-lang="hi"><span><strong>Hindi</strong> (हिन्दी)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ur')" data-lang="ur"><span><strong>Urdu</strong> (اردو)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('tr')" data-lang="tr"><span><strong>Turkish</strong> (Türkçe)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('zh-CN')" data-lang="zh-CN"><span><strong>Chinese</strong> (中文)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ru')" data-lang="ru"><span><strong>Russian</strong> (Русский)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('it')" data-lang="it"><span><strong>Italian</strong> (Italiano)</span></a></li>
+                         <li><a class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" href="javascript:void(0)" onclick="azaleaSwitchLanguage('ja')" data-lang="ja"><span><strong>Japanese</strong> (日本語)</span></a></li>
+                      </ul>
+                   </div>
+                   <div class="navbar-toggle"></div>
+                </div>
                <div class="responsive-menu"></div>
             </div>
          </div>
