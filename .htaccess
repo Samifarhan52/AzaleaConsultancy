@@ -2,6 +2,9 @@
 # AZALEA TOURISM & CONSULTANCY - HOSTINGER / APACHE PRODUCTION CONFIG
 # ====================================================================
 
+# Force index.html as the primary homepage (Overriding old WordPress index.php)
+DirectoryIndex index.html index.php index.htm
+
 # Enable URL Rewriting
 <IfModule mod_rewrite.c>
     RewriteEngine On
