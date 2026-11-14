@@ -150,7 +150,14 @@
         }, { offset: '50%' });
     }
 
-     // GSAP Reveal & Text Animations
+    function isTranslatedPage() {
+        return document.documentElement.classList.contains('translated-ltr') ||
+               document.documentElement.classList.contains('translated-rtl') ||
+               (document.documentElement.getAttribute('lang') && document.documentElement.getAttribute('lang') !== 'en') ||
+               (typeof document.cookie === 'string' && document.cookie.indexOf('googtrans=/en/') !== -1);
+    }
+
+    // GSAP Reveal & Text Animations
     if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
         gsap.registerPlugin(ScrollTrigger);
 
@@ -164,16 +171,36 @@
 
         ['.sis-text-anime-style-1', '.sis-text-anime-style-3'].forEach(selector => {
             document.querySelectorAll(selector).forEach(element => {
-                const split = new SplitText(element, { type: "words" });
-                gsap.from(split.words, {
-                    duration: 0.8,
-                    delay: selector === '.sis-text-anime-style-1' ? 0.4 : 0.2,
-                    y: 20,
-                    autoAlpha: 0,
-                    stagger: 0.04,
-                    ease: "power2.out",
-                    scrollTrigger: { trigger: element, start: "top 85%" }
-                });
+                if (isTranslatedPage() || typeof SplitText === "undefined") {
+                    gsap.from(element, {
+                        duration: 0.8,
+                        y: 20,
+                        opacity: 0,
+                        ease: "power2.out",
+                        scrollTrigger: { trigger: element, start: "top 85%" }
+                    });
+                    return;
+                }
+                try {
+                    const split = new SplitText(element, { type: "words" });
+                    gsap.from(split.words, {
+                        duration: 0.8,
+                        delay: selector === '.sis-text-anime-style-1' ? 0.4 : 0.2,
+                        y: 20,
+                        autoAlpha: 0,
+                        stagger: 0.04,
+                        ease: "power2.out",
+                        scrollTrigger: { trigger: element, start: "top 85%" }
+                    });
+                } catch (e) {
+                    gsap.from(element, {
+                        duration: 0.8,
+                        y: 20,
+                        opacity: 0,
+                        ease: "power2.out",
+                        scrollTrigger: { trigger: element, start: "top 85%" }
+                    });
+                }
             });
         });
     }
@@ -299,25 +326,40 @@
 
     // Hero Slider Start 
 	function animateActiveSlideText() {
-        gsap.set(".sis-text-anime-style-2", { clearProps: "all" });
-
-        const activeSlide = document.querySelector(".swiper-slide-active");
+        const activeSlide = document.querySelector(".hero-slider-layout .swiper-slide-active");
         if (!activeSlide) return;
         const animatedTextElements = activeSlide.querySelectorAll(".sis-text-anime-style-2");
 
-        animatedTextElements.forEach((element) => {
-            const animationSplitText = new SplitText(element, { type: "words, lines" });
+        const translated = isTranslatedPage();
 
-            gsap.from(animationSplitText.words, {
-				opacity: 0,
-                duration: 0.5,         
-				delay: 0.1,
-				y: 30,                 
-				autoAlpha: 0,
-				stagger: 0.04,         
-				ease: "power3.out",
+        if (translated || typeof SplitText === "undefined") {
+            // When translated or non-English, strictly avoid SplitText to prevent Google Translate DOM reconciliation wiping slides
+            animatedTextElements.forEach((element) => {
+                gsap.fromTo(element, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
             });
-        });
+            return;
+        }
+
+        try {
+            gsap.set(".sis-text-anime-style-2", { clearProps: "all" });
+            animatedTextElements.forEach((element) => {
+                const animationSplitText = new SplitText(element, { type: "words, lines" });
+
+                gsap.from(animationSplitText.words, {
+                    opacity: 0,
+                    duration: 0.5,         
+                    delay: 0.1,
+                    y: 30,                 
+                    autoAlpha: 0,
+                    stagger: 0.04,         
+                    ease: "power3.out",
+                });
+            });
+        } catch (e) {
+            animatedTextElements.forEach((element) => {
+                gsap.fromTo(element, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+            });
+        }
     }
     
 	initSwiper(".hero-slider-layout .swiper", {

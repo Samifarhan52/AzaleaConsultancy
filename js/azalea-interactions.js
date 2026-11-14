@@ -622,9 +622,11 @@ window.azaleaSwitchLanguage = function (lang) {
     document.body.classList.remove('rtl-layout');
   }
 
-  // Update current language code on all pills (desktop & mobile)
+  // Update current language code on all pills (desktop & mobile) with notranslate protection
   document.querySelectorAll('.azalea-current-lang-code').forEach((el) => {
     el.innerText = code;
+    el.classList.add('notranslate');
+    el.setAttribute('translate', 'no');
   });
 
   // Highlight active item in all dropdown menus
@@ -658,6 +660,16 @@ window.azaleaSwitchLanguage = function (lang) {
     }
   } catch (e) {}
 
+  // Smoothly recalculate Swiper dimensions & positions
+  setTimeout(() => {
+    document.querySelectorAll('.swiper').forEach((el) => {
+      if (el.swiper && typeof el.swiper.update === 'function') {
+        try { el.swiper.update(); } catch (err) {}
+      }
+    });
+    window.dispatchEvent(new Event('resize'));
+  }, 100);
+
   // Trigger Google Translate Combo
   const gtCombo = document.querySelector('.goog-te-combo');
   if (gtCombo) {
@@ -675,6 +687,8 @@ try {
     const code = (savedLang === 'zh-CN' ? 'ZH' : savedLang.toUpperCase());
     document.querySelectorAll('.azalea-current-lang-code').forEach((el) => {
       el.innerText = code;
+      el.classList.add('notranslate');
+      el.setAttribute('translate', 'no');
     });
     if (savedLang === 'ar' || savedLang === 'ur') {
       document.documentElement.setAttribute('dir', 'rtl');

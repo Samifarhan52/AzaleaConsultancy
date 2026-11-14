@@ -3265,3 +3265,59 @@ footer.main-footer,
     min-width: 215px !important;
   }
 }
+
+/* ===================================================================
+ * 19. MULTI-LANGUAGE & RTL SWIPER MECHANICS ISOLATION
+ * =================================================================== */
+.sis-hero,
+.hero-slider-layout,
+.hero-slider-layout .swiper,
+.hero-slider-layout .swiper-wrapper,
+.hero-slider-layout .swiper-slide,
+.hero-slider-image,
+.hero-slider-image video,
+.sisf-comman-swiper--slider .swiper,
+.sisf-comman-swiper--slider .swiper-wrapper,
+.sisf-comman-swiper--slider .swiper-slide,
+.sis-comman-swiper-slider .swiper,
+.sis-comman-swiper-slider .swiper-wrapper,
+.sis-comman-swiper-slider .swiper-slide,
+.sis-comman--swiper-slider .swiper,
+.sis-comman--swiper-slider .swiper-wrapper,
+.sis-comman--swiper-slider .swiper-slide {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+/* Text alignment & reading flow for RTL languages (Arabic, Urdu) */
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .hero-content .sis-section-title,
+html[dir="rtl"] .hero-content h1,
+html[dir="rtl"] .hero-content p,
+html[dir="rtl"] .hero-content .sisf-subtitle,
+html[dir="rtl"] .hero-content .sisf-m-text,
+html[dir="rtl"] .hero-content .sisf-m-text p {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+html[dir="rtl"] .hero-content .button-group {
+  direction: rtl !important;
+  justify-content: flex-start !important;
+}
+
+html[dir="rtl"] .hero-content .sis-btn-default i {
+  transform: scaleX(-1);
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+/* Language Switcher Badge Protection */
+.azalea-current-lang-code {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  user-select: none;
+}
+
