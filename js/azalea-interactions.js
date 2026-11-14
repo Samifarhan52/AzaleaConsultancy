@@ -1,8 +1,11 @@
 /**
  * AZALEA TOURISM & CONSULTANCY
  * Interactive Additions: Flipping Keywords, Multi-Language Engine, Eligibility Modal
- * Official Email: Info@azaleagroupqa.com | Official WhatsApp: +97451019991
+ * Official Email: info@azaleaconsultancy.com | Hotline: +97431162611 | WhatsApp: +97451019991
  */
+
+// Global Google Sheets Webhook URL for real-time lead capture
+window.AZALEA_GOOGLE_SHEETS_WEBHOOK = window.AZALEA_GOOGLE_SHEETS_WEBHOOK || localStorage.getItem('azalea_leads_webhook_url') || '';
 
 (function () {
   'use strict';
@@ -13,7 +16,7 @@
   const flipKeywords = [
     'Permanent Residency',
     'Global Work Permits',
-    'Overseas Education',
+    'Skilled Worker Visas',
     'Worldwide Tourism',
     'Business & Investor Visas',
     'Europe Opportunity Cards',
@@ -657,7 +660,7 @@ window.azaleaSaveLead = function (lead) {
     localStorage.setItem('azalea_leads_database', JSON.stringify(leads));
 
     // Optional cloud webhook sync (Google Sheets / Webhook)
-    const webhookUrl = localStorage.getItem('azalea_leads_webhook_url');
+    const webhookUrl = window.AZALEA_GOOGLE_SHEETS_WEBHOOK || localStorage.getItem('azalea_leads_webhook_url');
     if (webhookUrl) {
       fetch(webhookUrl, {
         method: 'POST',

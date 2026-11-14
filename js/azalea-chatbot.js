@@ -98,9 +98,9 @@ You can calculate your preliminary qualification score and legal pathway in unde
 • <strong>Headquarters:</strong> Buzwair Building, Al Mansoura, Doha, Qatar.<br>
 • <strong>Consultation Hours:</strong> Monday – Saturday: 11:00 AM – 7:00 PM.<br>
 • <strong>Friday:</strong> Closed (Weekly Holiday).<br>
-• <strong>Direct Advisory Hotline:</strong> <a href="tel:+97451019991" class="fw-bold text-primary">+974 5101 9991</a><br>
+• <strong>Direct Advisory Hotline:</strong> <a href="tel:+97431162611" class="fw-bold text-primary">+974 3116 2611</a><br>
 • <strong>Official WhatsApp:</strong> <a href="https://wa.me/97451019991" target="_blank" class="fw-bold text-success">+974 5101 9991</a><br>
-• <strong>Official Email:</strong> <a href="mailto:Info@azaleagroupqa.com" class="fw-bold text-primary">Info@azaleagroupqa.com</a><br><br>
+• <strong>Official Email:</strong> <a href="mailto:info@azaleaconsultancy.com" class="fw-bold text-primary">info@azaleaconsultancy.com</a><br><br>
 Walk-ins are warmly welcome, or you can book an appointment in advance via WhatsApp!`,
       cta: { text: 'Open in Google Maps', action: 'link', url: 'https://maps.google.com/?q=Buzwair+Building,+Al+Mansoura,+Doha,+Qatar' }
     },
