@@ -2736,6 +2736,30 @@ img[src*="about-visa-image"] {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 10px;
+}
+
+.chat-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.chat-header-info {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .chat-bot-avatar {
@@ -3015,47 +3039,65 @@ img[src*="about-visa-image"] {
 
   /* Mobile Chat Header with Safe Area Notch Support */
   .azalea-chat-header {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     padding-top: max(14px, env(safe-area-inset-top)) !important;
     padding-bottom: 12px !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
     flex-shrink: 0 !important;
     background: linear-gradient(135deg, #0b1a30 0%, #172a45 100%) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    gap: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .chat-header-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: hidden !important;
   }
 
   .azalea-chat-header .chat-bot-avatar {
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
     padding: 3px !important;
+    flex-shrink: 0 !important;
   }
 
   .azalea-chat-header .chat-header-info {
     min-width: 0 !important;
     flex: 1 1 auto !important;
-    margin-left: 10px !important;
+    overflow: hidden !important;
   }
 
   .azalea-chat-header .chat-header-info h6 {
-    font-size: 0.94rem !important;
-    margin-bottom: 2px !important;
+    font-size: 0.88rem !important;
+    margin: 0 0 2px 0 !important;
     line-height: 1.2 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    color: #ffffff !important;
   }
 
   .azalea-chat-header .chat-header-info span {
-    font-size: 11px !important;
+    font-size: 10.5px !important;
     line-height: 1.2 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     color: rgba(255, 255, 255, 0.75) !important;
+    display: block !important;
   }
 
   .azalea-chat-header .chat-header-actions {
@@ -3063,27 +3105,44 @@ img[src*="about-visa-image"] {
     align-items: center !important;
     gap: 8px !important;
     flex-shrink: 0 !important;
-    margin-left: 8px !important;
+    flex-grow: 0 !important;
+    margin-left: auto !important;
   }
 
   .azalea-chat-header .chat-action-btn {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
     font-size: 1.15rem !important;
     border-radius: 50% !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    display: flex !important;
+    background: rgba(255, 255, 255, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     color: #ffffff !important;
     touch-action: manipulation !important;
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .azalea-chat-header .chat-action-btn.chat-wa-btn {
+    background: rgba(34, 197, 94, 0.25) !important;
+    border-color: rgba(34, 197, 94, 0.5) !important;
+    color: #22c55e !important;
+  }
+
+  .azalea-chat-header .chat-action-btn.chat-close-btn {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
   }
 
   .azalea-chat-header .chat-action-btn:active {
-    background: rgba(255, 255, 255, 0.3) !important;
-    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.35) !important;
+    transform: scale(0.92) !important;
   }
 
   /* Chat Messages Container */
@@ -3876,5 +3935,62 @@ html[dir="rtl"] .hero-content .sis-btn-default i {
     height: 440px;
   }
 }
+
+/* ==========================================================================
+   AZALEA OFFICIAL 404 & ERROR PAGE STYLING
+   ========================================================================== */
+.azalea-error-hero {
+  background: radial-gradient(circle at 50% 12%, rgba(37, 99, 235, 0.05) 0%, #ffffff 70%);
+  min-height: calc(100vh - 350px);
+  padding: 50px 0 80px;
+}
+
+.azalea-404-glamour {
+  position: relative;
+  display: inline-block;
+  line-height: 0.9;
+  user-select: none;
+}
+
+.azalea-404-num {
+  font-size: clamp(6.5rem, 16vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -3px;
+  background: linear-gradient(135deg, #0b1a30 0%, #1d4ed8 50%, #c5a059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 15px 30px rgba(11, 26, 48, 0.12));
+}
+
+.azalea-pathways-recovery {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 35px rgba(11, 26, 48, 0.06);
+}
+
+.recovery-card {
+  background: #f8fafc;
+  transition: all 0.25s ease;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.recovery-card:hover {
+  background: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+  border-color: #2563eb !important;
+}
+
+.recovery-card h6 {
+  color: #0b1a30;
+  transition: color 0.2s ease;
+}
+
+.recovery-card:hover h6 {
+  color: #1d4ed8;
+}
+
 
 

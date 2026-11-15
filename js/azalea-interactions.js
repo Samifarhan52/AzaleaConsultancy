@@ -7,6 +7,21 @@
 // Global Google Sheets Webhook URL for real-time lead capture
 window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycby8XzJ0f_lbxGZq0QFzSJxXpn4p81oZ7DZmj9ua1yV4B1EEeBSC4C-sGKf5rqZtGLbc/exec";
 
+// =========================================================================
+// 0. GLOBAL APPLICATION RESILIENCE & ERROR SHIELD
+// =========================================================================
+window.addEventListener('error', function (event) {
+  if (event && event.message) {
+    console.warn('[Azalea Resilience Shield] Handled runtime warning:', event.message);
+  }
+});
+
+window.addEventListener('unhandledrejection', function (event) {
+  if (event && event.reason) {
+    console.warn('[Azalea Resilience Shield] Handled unhandled rejection:', event.reason);
+  }
+});
+
 (function () {
   'use strict';
 

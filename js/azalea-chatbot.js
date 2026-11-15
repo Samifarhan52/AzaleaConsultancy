@@ -254,22 +254,22 @@ To provide you with the most accurate advice tailored to your nationality, work 
         <div id="azaleaChatWindow" class="azalea-chat-window" style="display: none;">
           <!-- Chat Header -->
           <div class="azalea-chat-header">
-            <div class="d-flex align-items-center gap-3">
+            <div class="chat-header-brand">
               <div class="chat-bot-avatar">
                 <img src="images/azalea-mark-trimmed.png" alt="Azalea AI">
                 <span class="bot-online-indicator"></span>
               </div>
               <div class="chat-header-info">
-                <h6 class="mb-0 text-white fw-bold">Azalea AI Legal Advisor</h6>
-                <span class="text-white-50 small d-block" style="font-size: 11px;">Official Visa &amp; Relocation Intelligence &bull; Doha HQ</span>
+                <h6>Azalea AI Legal Advisor</h6>
+                <span>Licensed Visa Guidance &bull; Doha</span>
               </div>
             </div>
-            <div class="chat-header-actions d-flex align-items-center gap-2">
-              <a href="https://wa.me/97451019991" target="_blank" class="chat-action-btn" title="Direct WhatsApp Line" style="color: #22c55e;">
-                <i class="fa-brands fa-whatsapp fs-5"></i>
+            <div class="chat-header-actions">
+              <a href="https://wa.me/97451019991?text=Hello%20Azalea%20Legal%20Team!%20I%20am%20chatting%20with%20your%20AI%20Advisor%20and%20would%20like%20to%20connect%20directly." target="_blank" class="chat-action-btn chat-wa-btn" title="Connect on WhatsApp" aria-label="WhatsApp Support">
+                <i class="fa-brands fa-whatsapp"></i>
               </a>
-              <button id="azaleaChatCloseBtn" class="chat-action-btn" title="Close Chat">
-                <i class="fa-solid fa-xmark fs-6"></i>
+              <button id="azaleaChatCloseBtn" type="button" class="chat-action-btn chat-close-btn" title="Close Chat" aria-label="Close Chat Window">
+                <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
           </div>
@@ -423,7 +423,29 @@ To provide you with the most accurate advice tailored to your nationality, work 
         e.stopPropagation();
         closeChat();
       });
+      closeBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeChat();
+      });
     }
+
+    // Capture-phase document delegation for 100% reliable closing on touch & click
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('#azaleaChatCloseBtn') || e.target.closest('.chat-close-btn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeChat();
+      }
+    }, true);
+
+    document.addEventListener('touchend', function (e) {
+      if (e.target.closest('#azaleaChatCloseBtn') || e.target.closest('.chat-close-btn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeChat();
+      }
+    }, true);
 
     // Escape key listener to close chat
     document.addEventListener('keydown', function (e) {
