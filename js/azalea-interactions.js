@@ -185,12 +185,22 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
   const eligibilityModalEl = document.getElementById('azaleaEligibilityModal');
   let eligibilityModal = null;
 
+  // Clear legacy permanent block if present so returning visitors can see the popup
+  try {
+    localStorage.removeItem('azalea_home_popup_shown');
+  } catch (e) {}
+
   function initEligibilityModal() {
     if (!eligibilityModal && eligibilityModalEl && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-      eligibilityModal = new bootstrap.Modal(eligibilityModalEl, {
-        backdrop: true,
-        keyboard: true
-      });
+      try {
+        eligibilityModal = new bootstrap.Modal(eligibilityModalEl, {
+          backdrop: true,
+          keyboard: true,
+          focus: true
+        });
+      } catch (e) {
+        console.warn('Bootstrap modal init error:', e);
+      }
     }
     return eligibilityModal;
   }
@@ -204,38 +214,84 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
     });
   }
 
+  function closeEligibilityModal() {
+    if (eligibilityModal) {
+      try {
+        eligibilityModal.hide();
+      } catch (e) {}
+    }
+    if (window.jQuery && typeof window.jQuery('#azaleaEligibilityModal').modal === 'function') {
+      try {
+        window.jQuery('#azaleaEligibilityModal').modal('hide');
+      } catch (e) {}
+    }
+    if (eligibilityModalEl) {
+      eligibilityModalEl.classList.remove('show');
+      eligibilityModalEl.style.display = 'none';
+      eligibilityModalEl.setAttribute('aria-hidden', 'true');
+      eligibilityModalEl.removeAttribute('aria-modal');
+    }
+    document.body.classList.remove('modal-open');
+    document.body.style.removeProperty('padding-right');
+    document.querySelectorAll('.modal-backdrop').forEach((backdrop) => backdrop.remove());
+    if (mainHeader) mainHeader.style.removeProperty('z-index');
+  }
+
+  // Universal close trigger bindings for 100% responsiveness on mobile & desktop
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#azaleaEligibilityModal .btn-close-modal') || 
+        e.target.closest('#azaleaEligibilityModal [data-bs-dismiss="modal"]')) {
+      e.preventDefault();
+      closeEligibilityModal();
+    }
+  });
+
   function openEligibilityModal(targetCountry) {
-    initEligibilityModal();
-    if (eligibilityModal || (window.jQuery && typeof window.jQuery('#azaleaEligibilityModal').modal === 'function')) {
-      resetWizard();
-      if (targetCountry) {
-        const countrySelect = document.getElementById('modalTargetCountry');
-        if (countrySelect) {
-          let matched = false;
-          const cleanTarget = targetCountry.trim().toLowerCase();
-          for (let i = 0; i < countrySelect.options.length; i++) {
-            const optVal = countrySelect.options[i].value.toLowerCase();
-            const optText = countrySelect.options[i].text.toLowerCase();
-            if (optVal.includes(cleanTarget) || cleanTarget.includes(optVal) || optText.includes(cleanTarget)) {
-              countrySelect.selectedIndex = i;
-              matched = true;
-              break;
-            }
-          }
-          if (!matched) {
-            const newOpt = document.createElement('option');
-            newOpt.value = targetCountry.trim();
-            newOpt.text = targetCountry.trim() + ' (Specialist Advisory)';
-            newOpt.selected = true;
-            countrySelect.add(newOpt);
+    const modalInst = initEligibilityModal();
+    resetWizard();
+
+    if (targetCountry) {
+      const countrySelect = document.getElementById('modalTargetCountry');
+      if (countrySelect) {
+        let matched = false;
+        const cleanTarget = targetCountry.trim().toLowerCase();
+        for (let i = 0; i < countrySelect.options.length; i++) {
+          const optVal = countrySelect.options[i].value.toLowerCase();
+          const optText = countrySelect.options[i].text.toLowerCase();
+          if (optVal.includes(cleanTarget) || cleanTarget.includes(optVal) || optText.includes(cleanTarget)) {
+            countrySelect.selectedIndex = i;
+            matched = true;
+            break;
           }
         }
+        if (!matched) {
+          const newOpt = document.createElement('option');
+          newOpt.value = targetCountry.trim();
+          newOpt.text = targetCountry.trim() + ' (Specialist Advisory)';
+          newOpt.selected = true;
+          countrySelect.add(newOpt);
+        }
       }
-      if (eligibilityModal) {
-        eligibilityModal.show();
-      } else {
+    }
+
+    if (modalInst) {
+      try {
+        modalInst.show();
+        return;
+      } catch (err) {}
+    }
+    if (window.jQuery && typeof window.jQuery('#azaleaEligibilityModal').modal === 'function') {
+      try {
         window.jQuery('#azaleaEligibilityModal').modal('show');
-      }
+        return;
+      } catch (err) {}
+    }
+    if (eligibilityModalEl) {
+      eligibilityModalEl.classList.add('show');
+      eligibilityModalEl.style.display = 'block';
+      eligibilityModalEl.removeAttribute('aria-hidden');
+      eligibilityModalEl.setAttribute('aria-modal', 'true');
+      document.body.classList.add('modal-open');
     }
   }
 
@@ -259,17 +315,22 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
     }
   });
 
-  // Auto popup for visitors: ONLY ON HOME PAGE, AND ONLY ONCE PER VISIT
+  // Auto popup for visitors: ONLY ON HOME PAGE, AND ONLY ONCE PER VISIT SESSION
   function isHomePage() {
-    const p = (window.location.pathname || '').toLowerCase();
-    // Subpages where auto popup is strictly disabled
-    const subpages = ['about-us', 'service', 'our-countries', 'contact', 'faq', 'form', 'privacy-policy', 'terms-conditions'];
+    const raw = (window.location.pathname || '').toLowerCase();
+    const clean = raw.replace(/\/+$/, '');
+    const segments = clean.split('/').filter(Boolean);
+    const lastSeg = segments.pop() || '';
+    const subpages = [
+      'about-us', 'service', 'our-countries', 'contact', 
+      'faq', 'form', 'privacy-policy', 'terms-conditions'
+    ];
     for (let i = 0; i < subpages.length; i++) {
-      if (p.indexOf(subpages[i]) !== -1) {
+      if (lastSeg === subpages[i] || lastSeg.startsWith(subpages[i]) || raw.includes('/' + subpages[i])) {
         return false;
       }
     }
-    return p === '/' || p === '' || p.endsWith('/index.html') || p.endsWith('/index') || (window.location.protocol === 'file:' && p.endsWith('index.html'));
+    return lastSeg === '' || lastSeg === 'index' || lastSeg === 'index.html';
   }
 
   function triggerWelcomePopup() {
@@ -278,27 +339,71 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
       return;
     }
 
-    // Strictly verify shown only once per user
-    const alreadyShown = safeGetStorage('local', 'azalea_home_popup_shown') || safeGetStorage('session', 'azalea_home_popup_shown');
-    if (alreadyShown) {
+    // Check query params for instant debugging / testing override (?popup=1 or ?test=1)
+    const search = window.location.search || '';
+    const isTestOverride = search.includes('popup') || search.includes('test') || window.location.hash === '#eligibility';
+
+    // Strictly verify shown only once per session / browser tab visit
+    const alreadyShownSession = safeGetStorage('session', 'azalea_session_popup_shown');
+    if (alreadyShownSession && !isTestOverride) {
       return;
     }
 
     if (!document.querySelector('.modal.show')) {
       openEligibilityModal();
-      safeSetStorage('local', 'azalea_home_popup_shown', 'true');
-      safeSetStorage('session', 'azalea_home_popup_shown', 'true');
+      safeSetStorage('session', 'azalea_session_popup_shown', 'true');
     }
   }
 
   if (document.readyState === 'complete') {
-    setTimeout(triggerWelcomePopup, 1800);
+    setTimeout(triggerWelcomePopup, 2000);
   } else {
-    window.addEventListener('load', () => setTimeout(triggerWelcomePopup, 1800));
+    window.addEventListener('load', () => setTimeout(triggerWelcomePopup, 2000));
   }
 
   let wizardStep = 1;
   const maxSteps = 2;
+
+  // Inline Validation Notification (Zero browser alert freeze on mobile)
+  function showModalAlert(message, inputId) {
+    let alertBox = document.getElementById('modalInlineAlert');
+    if (!alertBox) {
+      const form = document.getElementById('azaleaEligibilityForm');
+      if (form) {
+        alertBox = document.createElement('div');
+        alertBox.id = 'modalInlineAlert';
+        alertBox.className = 'modal-alert-box alert alert-warning py-2 px-3 small rounded-3 mb-2 d-flex align-items-center gap-2';
+        alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation flex-shrink-0 text-warning"></i><span id="modalInlineAlertText"></span>';
+        form.prepend(alertBox);
+      }
+    }
+    if (alertBox) {
+      const textEl = document.getElementById('modalInlineAlertText') || alertBox;
+      textEl.innerText = message;
+      alertBox.classList.remove('d-none');
+      alertBox.style.setProperty('display', 'flex', 'important');
+    }
+    if (inputId) {
+      const input = document.getElementById(inputId);
+      if (input) {
+        input.focus();
+        input.classList.add('is-invalid');
+        setTimeout(() => input.classList.remove('is-invalid'), 3000);
+      }
+    }
+    const modalBody = document.querySelector('.modal-wizard-body');
+    if (modalBody) {
+      modalBody.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function hideModalAlert() {
+    const alertBox = document.getElementById('modalInlineAlert');
+    if (alertBox) {
+      alertBox.classList.add('d-none');
+      alertBox.style.setProperty('display', 'none', 'important');
+    }
+  }
 
   function updateWizardState() {
     const pill1 = document.getElementById('stepPill1');
@@ -323,26 +428,34 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
   }
 
   window.nextEligibilityStep = function (step) {
+    hideModalAlert();
     if (step === 1) {
       const countryEl = document.getElementById('modalTargetCountry');
       const visaEl = document.getElementById('modalVisaType');
       if (countryEl && !countryEl.value) {
-        alert('Please choose your target destination country.');
+        showModalAlert('Please choose your target destination country.', 'modalTargetCountry');
         return;
       }
       if (visaEl && !visaEl.value) {
-        alert('Please choose your visa category.');
+        showModalAlert('Please choose your visa category.', 'modalVisaType');
         return;
       }
     }
 
     wizardStep = 2;
     updateWizardState();
+    const modalBody = document.querySelector('.modal-wizard-body');
+    if (modalBody) modalBody.scrollTo({ top: 0, behavior: 'smooth' });
+    const nameField = document.getElementById('modalApplicantName');
+    if (nameField) setTimeout(() => nameField.focus(), 150);
   };
 
   window.prevEligibilityStep = function (step) {
+    hideModalAlert();
     wizardStep = 1;
     updateWizardState();
+    const modalBody = document.querySelector('.modal-wizard-body');
+    if (modalBody) modalBody.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   function calculateLiveScore() {
@@ -356,6 +469,7 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
 
   function resetWizard() {
     wizardStep = 1;
+    hideModalAlert();
     const form = document.getElementById('azaleaEligibilityForm');
     if (form) form.reset();
     const flowWrap = document.getElementById('wizardFlowWrapper');
@@ -363,23 +477,17 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
     if (flowWrap) flowWrap.style.display = 'block';
     if (resultWrap) resultWrap.style.display = 'none';
     updateWizardState();
+    const modalBody = document.querySelector('.modal-wizard-body');
+    if (modalBody) modalBody.scrollTop = 0;
   }
 
-  // Strict Digits-Only Enforcement on Phone Inputs (No letters or symbols allowed)
+  // Robust Digits-Only Enforcement on Phone Inputs (Clean regex replace without breaking virtual keyboards)
   document.querySelectorAll('.azalea-digits-only').forEach((input) => {
-    input.addEventListener('keypress', function (e) {
-      if (e.key && !/^[0-9]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    });
     input.addEventListener('input', function () {
-      this.value = this.value.replace(/[^0-9]/g, '');
-    });
-    input.addEventListener('paste', function (e) {
-      e.preventDefault();
-      const text = (e.clipboardData || window.clipboardData).getData('text');
-      const digits = text.replace(/[^0-9]/g, '');
-      document.execCommand('insertText', false, digits);
+      const sanitized = this.value.replace(/[^0-9]/g, '');
+      if (this.value !== sanitized) {
+        this.value = sanitized;
+      }
     });
   });
 
@@ -387,10 +495,11 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
   if (eligibilityForm) {
     eligibilityForm.addEventListener('submit', function (e) {
       e.preventDefault();
+      hideModalAlert();
 
-      const name = document.getElementById('modalApplicantName').value.trim();
-      const email = document.getElementById('modalApplicantEmail').value.trim();
-      const phone = document.getElementById('modalApplicantPhone').value.trim();
+      const name = document.getElementById('modalApplicantName')?.value.trim() || '';
+      const email = document.getElementById('modalApplicantEmail')?.value.trim() || '';
+      const phone = document.getElementById('modalApplicantPhone')?.value.trim() || '';
       const dialCode = document.getElementById('modalCountryCode') ? document.getElementById('modalCountryCode').value : '+974';
       const fullPhone = `${dialCode} ${phone}`;
       const countryEl = document.getElementById('modalTargetCountry');
@@ -399,15 +508,23 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
       const visaType = visaEl ? visaEl.value : 'Work Permit & Skilled Employment';
       const timeline = document.querySelector('input[name="modal_timeline"]:checked')?.value || 'Immediate (1 - 3 Months)';
 
-      if (!name || !email || !phone) {
-        alert('Please fill in your full name, email address, and active phone number.');
+      if (!name) {
+        showModalAlert('Please enter your full legal name as per passport.', 'modalApplicantName');
+        return;
+      }
+      if (!phone || phone.length < 5) {
+        showModalAlert('Please enter your active WhatsApp or phone number.', 'modalApplicantPhone');
+        return;
+      }
+      if (!email || email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+        showModalAlert('Please enter a valid official email address.', 'modalApplicantEmail');
         return;
       }
 
       const score = calculateLiveScore();
       const refCode = 'AZA-QA-' + Math.floor(1000 + Math.random() * 9000);
 
-      // Save lead to local database & trigger Excel ledger
+      // Save lead to local database & trigger Excel ledger / webhook
       if (window.azaleaSaveLead) {
         window.azaleaSaveLead({
           id: refCode,
@@ -424,6 +541,9 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
       document.getElementById('wizardFlowWrapper').style.display = 'none';
       const resultWrap = document.getElementById('wizardResultContainer');
       resultWrap.style.display = 'block';
+
+      const modalBody = document.querySelector('.modal-wizard-body');
+      if (modalBody) modalBody.scrollTo({ top: 0, behavior: 'smooth' });
 
       document.getElementById('modalResultName').innerText = name;
       document.getElementById('modalResultRef').innerText = refCode;
@@ -446,16 +566,17 @@ window.AZALEA_GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycb
         `Hello Azalea Legal Team! I have completed the official visa eligibility assessment on your website. Please review my profile and send my document checklist.`
       );
 
+      const waUrl = `https://wa.me/97451019991?text=${waMsg}`;
       const waLink = document.getElementById('modalDirectWhatsAppBtn') || document.getElementById('modalWhatsAppBtn');
       if (waLink) {
-        const waUrl = `https://wa.me/97451019991?text=${waMsg}`;
-      waLink.href = waUrl;
+        waLink.href = waUrl;
+      }
+
       try {
         window.open(waUrl, '_blank');
       } catch (err) {}
-      }
 
-      safeSetStorage('session', 'azalea_modal_shown', 'true');
+      safeSetStorage('session', 'azalea_session_popup_shown', 'true');
     });
   }
 

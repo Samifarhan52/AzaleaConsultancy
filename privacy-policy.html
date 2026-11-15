@@ -35,7 +35,7 @@
       <link href="css/custom.css" rel="stylesheet" media="screen">
    
       <!-- Azalea Custom Extensions -->
-      <link rel="stylesheet" href="css/azalea-custom.css?v=5.0">
+      <link rel="stylesheet" href="css/azalea-custom.css?v=6.0">
       <style id="azalea-modal-failsafe-css">
          /* Failsafe Z-Index: Ensure Modal Popup is ALWAYS in front of all headers and overlays */
          .modal.azalea-modal,
@@ -727,6 +727,10 @@
 
                <!-- Modal Body -->
                <div class="modal-wizard-body">
+                  <div id="modalInlineAlert" class="modal-alert-box alert alert-warning py-2 px-3 small rounded-3 mb-2 d-none align-items-center gap-2" role="alert">
+                     <i class="fa-solid fa-triangle-exclamation flex-shrink-0 text-warning"></i>
+                     <span id="modalInlineAlertText">Please complete the required fields.</span>
+                  </div>
                   <form id="azaleaEligibilityForm">
                      <div id="wizardFlowWrapper">
                         <!-- STEP 1: VISA PROFILE -->
@@ -922,7 +926,7 @@
       </div>
 
       <!-- Azalea Interactions Script -->
-      <script src="js/azalea-interactions.js?v=5.0"></script>
+      <script src="js/azalea-interactions.js?v=6.0"></script>
 
    </body>
 </html>
