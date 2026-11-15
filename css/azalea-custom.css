@@ -2607,7 +2607,11 @@ img[src*="about-visa-image"] {
 
 .azalea-chatbot-wrap {
   position: relative;
-  z-index: 9999;
+  z-index: 2147483640;
+}
+
+.azalea-chatbot-wrap.is-open {
+  z-index: 2147483647 !important;
 }
 
 .azalea-chat-toggle-btn {
@@ -3017,9 +3021,27 @@ img[src*="about-visa-image"] {
   }
 
   /* Prevent background scrolling when chat is open on mobile */
+  html.azalea-chat-open,
   body.azalea-chat-open {
     overflow: hidden !important;
+    height: 100% !important;
+    position: fixed !important;
+    width: 100% !important;
     touch-action: none !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  /* Completely suppress website sticky header and all main headers when chat is open */
+  body.azalea-chat-open #sisf-page-header,
+  body.azalea-chat-open #sisf-page-header-inner,
+  body.azalea-chat-open .sisf-main-header,
+  body.azalea-chat-open .sis-header-top,
+  body.azalea-chat-open header {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
   }
 
   /* Hide the floating launcher button and alert bubble completely when chat is open on mobile */
@@ -3037,7 +3059,7 @@ img[src*="about-visa-image"] {
     pointer-events: none !important;
   }
 
-  /* Mobile Chat Header with Safe Area Notch Support */
+  /* Mobile Chat Header with Safe Area Notch Support - Always Locked to Top */
   .azalea-chat-header {
     width: 100% !important;
     max-width: 100% !important;
@@ -3047,6 +3069,9 @@ img[src*="about-visa-image"] {
     padding-left: 12px !important;
     padding-right: 12px !important;
     flex-shrink: 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
     background: linear-gradient(135deg, #0b1a30 0%, #172a45 100%) !important;
     display: flex !important;
     align-items: center !important;
@@ -3150,6 +3175,7 @@ img[src*="about-visa-image"] {
     flex: 1 1 auto !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
     padding: 14px 14px 10px !important;
     background: #f8fafc !important;
   }
@@ -3212,6 +3238,9 @@ img[src*="about-visa-image"] {
     background: #ffffff !important;
     border-top: 1px solid #e2e8f0 !important;
     flex-shrink: 0 !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 100 !important;
   }
 
   /* 16px font-size prevents iOS Safari from auto-zooming! */
@@ -4095,6 +4124,114 @@ html[dir="rtl"] .hero-content .sis-btn-default i {
   background: #2563eb;
   display: inline-block;
 }
+
+/* ==========================================================================
+   FORM PAGE ACCREDITED COUNTRIES SCROLLING MARQUEE (PROMOTIONS)
+   ========================================================================== */
+.azalea-form-countries-marquee {
+  width: 100%;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.azalea-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  display: inline-block;
+  animation: elavatexPulse 1.8s infinite ease-in-out;
+}
+
+.azalea-marquee-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 8px 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.azalea-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  animation: azaleaMarqueeScroll 38s linear infinite;
+  will-change: transform;
+}
+
+.azalea-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes azaleaMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.azalea-country-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: rgba(11, 26, 48, 0.88) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  padding: 8px 16px !important;
+  border-radius: 9999px !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  cursor: default !important;
+}
+
+.azalea-country-pill:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #0b1a30 100%) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4) !important;
+}
+
+.azalea-country-pill .country-flag {
+  font-size: 1.35rem !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+.azalea-country-pill .country-name {
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1.25 !important;
+}
+
+.azalea-country-pill .country-desc {
+  display: block !important;
+  font-size: 10.5px !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  line-height: 1.2 !important;
+}
+
+.azalea-country-pill.special-global {
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.35) 0%, rgba(11, 26, 48, 0.95) 100%) !important;
+  border-color: rgba(197, 160, 89, 0.55) !important;
+}
+
+.azalea-country-pill.special-global .country-name {
+  color: #fbbf24 !important;
+}
+
+.azalea-country-pill.special-global .country-desc {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
 
 
 

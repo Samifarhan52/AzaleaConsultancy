@@ -366,6 +366,7 @@ To provide you with the most accurate advice tailored to your nationality, work 
       if (unreadBadge) unreadBadge.style.display = 'none';
 
       if (window.innerWidth <= 991) {
+        document.documentElement.classList.add('azalea-chat-open');
         document.body.classList.add('azalea-chat-open');
       }
 
@@ -399,6 +400,7 @@ To provide you with the most accurate advice tailored to your nationality, work 
         alertBubble.classList.remove('is-hidden');
         alertBubble.style.removeProperty('display');
       }
+      document.documentElement.classList.remove('azalea-chat-open');
       document.body.classList.remove('azalea-chat-open');
     }
 
