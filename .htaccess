@@ -18,7 +18,8 @@ DirectoryIndex index.html index.php index.htm
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.html\ HTTP/ [NC]
     RewriteRule ^(.*)index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-    # 3. Canonical Clean URL: Redirect any request with .html extension to clean URL
+    # 3. Canonical Clean URL: Redirect any request with .html extension to clean URL (Exclude Google verification files)
+    RewriteCond %{REQUEST_URI} !^/google[a-z0-9]+\.html$ [NC]
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\s?]+)\.html[\s?] [NC]
     RewriteRule ^([^\s?]+)\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
 

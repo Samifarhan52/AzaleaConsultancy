@@ -10,6 +10,7 @@
     { "source": "/our-countries", "destination": "/our-countries.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/faq", "destination": "/faq.html" },
-    { "source": "/404", "destination": "/404.html" }
+    { "source": "/404", "destination": "/404.html" },
+    { "source": "/googlefa1fdc2a8d9d6867.html", "destination": "/googlefa1fdc2a8d9d6867.html" }
   ]
 }
