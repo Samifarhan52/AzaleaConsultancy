@@ -341,22 +341,75 @@ To provide you with the most accurate advice tailored to your nationality, work 
     const chatForm = document.getElementById('azaleaChatForm');
     const chatInput = document.getElementById('azaleaChatInput');
     const unreadBadge = document.getElementById('chatUnreadBadge');
+    const widget = document.getElementById('azaleaChatbotWidget');
 
-    function toggleChat() {
-      const isVisible = chatWin.style.display !== 'none';
-      if (isVisible) {
-        chatWin.style.display = 'none';
-        if (triggerBtn) triggerBtn.classList.remove('is-active');
-        if (alertBubble) alertBubble.classList.remove('is-hidden');
-      } else {
-        chatWin.style.display = 'flex';
-        if (triggerBtn) triggerBtn.classList.add('is-active');
-        if (alertBubble) alertBubble.classList.add('is-hidden');
-        if (unreadBadge) unreadBadge.style.display = 'none';
-        chatInput.focus();
-        scrollToBottom();
+    function openChat() {
+      if (!chatWin) return;
+      chatWin.classList.add('is-open');
+      chatWin.style.setProperty('display', 'flex', 'important');
+      if (widget) widget.classList.add('is-open');
+      if (triggerBtn) {
+        triggerBtn.classList.add('is-active');
+        if (window.innerWidth <= 991) {
+          triggerBtn.style.setProperty('display', 'none', 'important');
+        }
+      }
+      if (alertBubble) {
+        alertBubble.classList.add('is-hidden');
+        if (window.innerWidth <= 991) {
+          alertBubble.style.setProperty('display', 'none', 'important');
+        }
+      }
+      if (unreadBadge) unreadBadge.style.display = 'none';
+
+      if (window.innerWidth <= 991) {
+        document.body.classList.add('azalea-chat-open');
+      }
+
+      // Keep welcome message visible at top on initial open; scroll to bottom only if conversation is active
+      const messagesContainer = document.getElementById('azaleaChatMessages');
+      if (messagesContainer) {
+        const userMsgs = messagesContainer.querySelectorAll('.user-msg');
+        if (userMsgs.length > 0) {
+          scrollToBottom();
+        } else {
+          messagesContainer.scrollTop = 0;
+        }
+      }
+
+      // Auto-focus only on desktop to prevent mobile virtual keyboard jump
+      if (window.innerWidth > 991 && chatInput) {
+        setTimeout(() => chatInput.focus(), 150);
       }
     }
+
+    function closeChat() {
+      if (!chatWin) return;
+      chatWin.classList.remove('is-open');
+      chatWin.style.setProperty('display', 'none', 'important');
+      if (widget) widget.classList.remove('is-open');
+      if (triggerBtn) {
+        triggerBtn.classList.remove('is-active');
+        triggerBtn.style.removeProperty('display');
+      }
+      if (alertBubble) {
+        alertBubble.classList.remove('is-hidden');
+        alertBubble.style.removeProperty('display');
+      }
+      document.body.classList.remove('azalea-chat-open');
+    }
+
+    function toggleChat() {
+      const isVisible = chatWin && chatWin.classList.contains('is-open');
+      if (isVisible) {
+        closeChat();
+      } else {
+        openChat();
+      }
+    }
+
+    window.azaleaOpenChat = openChat;
+    window.azaleaCloseChat = closeChat;
 
     if (triggerBtn) {
       triggerBtn.addEventListener('click', toggleChat);
@@ -365,12 +418,21 @@ To provide you with the most accurate advice tailored to your nationality, work 
       alertBubble.addEventListener('click', toggleChat);
     }
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        chatWin.style.display = 'none';
-        if (triggerBtn) triggerBtn.classList.remove('is-active');
-        if (alertBubble) alertBubble.classList.remove('is-hidden');
+      closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeChat();
       });
     }
+
+    // Escape key listener to close chat
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        if (chatWin && chatWin.style.display !== 'none') {
+          closeChat();
+        }
+      }
+    });
 
     // Quick chips delegation
     document.addEventListener('click', function (e) {
