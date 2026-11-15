@@ -1,0 +1,25 @@
+# ====================================================================
+# Azalea Tourism & Consultancy & Services - Robots.txt
+# Official Website: https://azaleaconsultancy.com/
+# Doha Headquarters, Qatar
+# ====================================================================
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*.js.map$
+
+# Allow specific useful search crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+# Canonical Sitemap Declaration
+Sitemap: https://azaleaconsultancy.com/sitemap.xml

@@ -319,10 +319,13 @@ To provide you with the most accurate advice tailored to your nationality, work 
                 <i class="fa-solid fa-paper-plane"></i>
               </button>
             </form>
-            <div class="chat-footer-brand text-center mt-2">
-              <span class="text-muted" style="font-size: 10.5px;">
-                <i class="fa-solid fa-shield-halved text-primary me-1"></i> Certified Legal Guidance &bull; Buzwair Bldg, Doha
+            <div class="chat-footer-brand d-flex align-items-center justify-content-between flex-wrap gap-1 px-1 mt-2">
+              <span class="text-muted" style="font-size: 10px;">
+                <i class="fa-solid fa-shield-halved text-primary me-1"></i> Certified Legal Guidance &bull; Doha
               </span>
+              <a href="https://elavatex.com" target="_blank" rel="noopener noreferrer" class="chat-elavatex-link" title="Developed by ElavateX - High Performance Digital &amp; AI Systems">
+                <span class="elavatex-chat-dot"></span> Developed by <strong class="elavatex-highlight">ElavateX</strong> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 8px;"></i>
+              </a>
             </div>
           </div>
         </div>
