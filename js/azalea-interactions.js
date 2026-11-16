@@ -986,6 +986,41 @@ window.azaleaExportLeadsToExcel = function () {
   }
 };
 
+window.azaleaFixAndSanitizeAllLeads = function () {
+  try {
+    const rawLeads = window.azaleaGetLeads();
+    if (!rawLeads || rawLeads.length === 0) {
+      alert('No leads recorded in local database to sanitize.');
+      return;
+    }
+
+    let fixedCount = 0;
+    const sanitizedLeads = rawLeads.map((lead) => {
+      let rawMobile = (lead.mobile || 'N/A').toString().trim();
+      let safeMobile = rawMobile;
+      if (safeMobile !== 'N/A') {
+        safeMobile = safeMobile.replace(/^=+\+?/, '+');
+        if (!safeMobile.startsWith("'")) {
+          safeMobile = "'" + safeMobile;
+          fixedCount++;
+        }
+      }
+      return {
+        ...lead,
+        mobile: safeMobile,
+        name: (lead.name || 'Anonymous Applicant').toString().trim().replace(/\s+/g, ' '),
+        email: (lead.email || 'N/A').toString().trim().toLowerCase()
+      };
+    });
+
+    localStorage.setItem('azalea_leads_database', JSON.stringify(sanitizedLeads));
+    alert(`Azalea Lead Rectifier:\nSuccessfully scanned and sanitized ${sanitizedLeads.length} leads.\n${fixedCount} phone numbers updated to plain text standard.`);
+    return sanitizedLeads;
+  } catch (err) {
+    console.error('Error sanitizing leads:', err);
+  }
+};
+
 
   // Pure Vanilla Dropdown Toggle for Navbar Language Switcher (Zero Popper dependency)
   document.addEventListener("click", function (e) {
