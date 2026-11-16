@@ -876,19 +876,32 @@ window.azaleaGetLeads = function () {
 window.azaleaSaveLead = function (lead) {
   try {
     const leads = window.azaleaGetLeads();
+
+    // In Google Sheets, a string starting with "+" (e.g. "+974 51019991") is evaluated as a math formula.
+    // The space between dial code and number triggers a formula syntax parse error (#ERROR!).
+    // Prepending a single apostrophe "'" forces Google Sheets and Excel to store it strictly as a plain text string.
+    let rawMobile = (lead.mobile || 'N/A').toString().trim();
+    let safeMobile = rawMobile;
+    if (safeMobile !== 'N/A') {
+      safeMobile = safeMobile.replace(/^=+\+?/, '+');
+      if (!safeMobile.startsWith("'")) {
+        safeMobile = "'" + safeMobile;
+      }
+    }
+
     const newLead = {
       id: lead.id || ('AZA-QA-' + Math.floor(1000 + Math.random() * 9000)),
       date: new Date().toLocaleString('en-US', { timeZone: 'Asia/Qatar' }),
       timestamp: Date.now(),
       name: lead.name || 'Anonymous Applicant',
-      mobile: lead.mobile || 'N/A',
+      mobile: safeMobile,
       email: lead.email || 'N/A',
       targetCountry: lead.targetCountry || 'General Relocation',
       visaInterest: lead.visaInterest || 'General Visa Assessment',
       education: lead.education || 'N/A',
       timeline: lead.timeline || 'Immediate (1 - 3 Months)',
       source: lead.source || 'Website Assessment Form',
-      status: 'Active Lead'
+      status: lead.status || 'Active Lead'
     };
 
     leads.unshift(newLead);

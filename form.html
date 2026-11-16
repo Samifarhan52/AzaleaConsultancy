@@ -1245,12 +1245,14 @@
                   const refCode = 'AZA-QA-' + Math.floor(1000 + Math.random() * 9000);
                   const score = 88 + Math.floor(Math.random() * 8); // 88% - 96% match
 
+                  const formattedMobile = "'" + `${dialCode} ${phone}`.trim();
+
                   if (window.azaleaSaveLead) {
                      window.azaleaSaveLead({
                         id: refCode,
                         name: name,
                         email: email,
-                        mobile: `${dialCode} ${phone}`,
+                        mobile: formattedMobile,
                         targetCountry: targetCountry,
                         visaInterest: visaType,
                         education: edu,
@@ -1267,7 +1269,7 @@
                               id: refCode,
                               name: name,
                               email: email,
-                              mobile: `${dialCode} ${phone}`,
+                              mobile: formattedMobile,
                               targetCountry: targetCountry,
                               visaInterest: visaType,
                               education: edu,
